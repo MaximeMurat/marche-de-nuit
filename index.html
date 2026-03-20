@@ -512,8 +512,7 @@ async function deleteAgent(nom,date){
   if(!confirm('Supprimer la réponse de "'+nom+'" ?'))return;
   try{
     await api({action:'deleteResponse',nom,date});
-    responses=responses.filter(r=>!(r.nom===nom&&r.date===date));
-    renderDash();
+    await loadAndRenderDash();
   }catch(e){alert('Erreur lors de la suppression.');}
 }
 
