@@ -14,18 +14,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tabs{display:flex;gap:6px;margin-bottom:20px;background:#e8e6e0;border-radius:10px;padding:4px}
 .tab-btn{flex:1;padding:8px;border-radius:8px;border:none;background:transparent;color:#5f5e5a;font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s}
 .tab-btn.active{background:#fff;color:#1a1a18;font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.panel{display:none}.panel.active{display:block}
+.panel{display:none}
+.panel.active{display:block}
+/* LOCK */
 .lock-screen{text-align:center;padding:40px 20px}
 .lock-icon{font-size:48px;margin-bottom:16px}
 .lock-title{font-size:18px;font-weight:500;margin-bottom:8px}
 .lock-desc{font-size:13px;color:#888780;margin-bottom:24px}
-.lock-input{width:100%;max-width:240px;padding:12px;text-align:center;font-size:20px;letter-spacing:8px;border:2px solid #d3d1c7;border-radius:12px;background:#fff;font-family:inherit;outline:none;margin-bottom:12px}
+.lock-input{width:100%;max-width:240px;padding:12px;text-align:center;font-size:20px;letter-spacing:8px;border:2px solid #d3d1c7;border-radius:12px;background:#fff;font-family:inherit;outline:none;margin-bottom:12px;display:block;margin-left:auto;margin-right:auto}
 .lock-input:focus{border-color:#1D9E75}
 .lock-btn{padding:11px 32px;background:#1D9E75;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
 .lock-error{font-size:13px;color:#E24B4A;margin-top:8px;display:none}
+/* BANNER */
 .banner{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;background:#E1F5EE;border:1px solid #1D9E75;margin-bottom:18px}
 .banner-label{font-size:11px;color:#0F6E56;font-weight:500}
 .banner-date{font-size:16px;font-weight:600;color:#085041}
+/* MODE */
 .mode-selector{display:flex;gap:10px;margin-bottom:18px}
 .mode-card{flex:1;padding:12px;border-radius:12px;border:1.5px solid #d3d1c7;background:#fff;cursor:pointer;text-align:center;transition:all .15s}
 .mode-card.selected{border-color:#1D9E75;background:#E1F5EE}
@@ -33,6 +37,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mode-card.selected .mode-title{color:#085041}
 .mode-desc{font-size:11px;color:#888780}
 .mode-card.selected .mode-desc{color:#0F6E56}
+/* FORM */
 .card{background:#fff;border:1px solid #d3d1c7;border-radius:12px;padding:18px}
 .card-title{font-size:15px;font-weight:500;margin-bottom:16px}
 .field{margin-bottom:14px}
@@ -43,6 +48,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .dispo-btn{flex:1;padding:10px;border-radius:8px;border:1.5px solid #d3d1c7;background:#f5f5f3;font-size:14px;font-family:inherit;cursor:pointer;color:#5f5e5a;transition:all .15s}
 .dispo-btn.sel-dispo{border-color:#1D9E75;background:#E1F5EE;color:#085041;font-weight:500}
 .dispo-btn.sel-absent{border-color:#BA7517;background:#FAEEDA;color:#412402;font-weight:500}
+/* REFERENT */
 .ref-self-block{padding:12px;border-radius:8px;background:#f5f5f3;border:1px solid #d3d1c7;margin-bottom:14px}
 .ref-self-name{font-size:14px;font-weight:500;margin-bottom:8px}
 .toggle-group{display:flex;gap:6px}
@@ -51,15 +57,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tg-btn.on-absent{background:#FAEEDA;border-color:#BA7517;color:#412402;font-weight:500}
 .agents-block{display:flex;flex-direction:column;gap:8px}
 .agent-row-form{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;border:1px solid #d3d1c7;background:#f5f5f3}
-.agent-row-form input[type="text"]{flex:1;padding:5px 8px;font-size:13px;border:1px solid #d3d1c7;border-radius:6px;background:#fff;color:#1a1a18;font-family:inherit;outline:none}
-.remove-row-btn{background:none;border:none;color:#b4b2a9;font-size:18px;cursor:pointer;padding:0 2px;flex-shrink:0}
+.agent-row-form input{flex:1;padding:5px 8px;font-size:13px;border:1px solid #d3d1c7;border-radius:6px;background:#fff;color:#1a1a18;font-family:inherit;outline:none}
+.remove-row-btn{background:none;border:none;color:#b4b2a9;font-size:18px;cursor:pointer;padding:0 2px;flex-shrink:0;line-height:1}
 .add-row-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;border-radius:8px;border:1px dashed #b4b2a9;background:transparent;color:#888780;font-size:13px;cursor:pointer;font-family:inherit;margin-top:6px;width:100%}
+/* BUTTONS */
 .submit-btn{width:100%;padding:12px;background:#1D9E75;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;margin-top:12px;transition:background .15s}
 .submit-btn:hover{background:#0F6E56}
 .submit-btn:disabled{background:#b4b2a9;cursor:default}
 .success-msg{display:none;background:#E1F5EE;border:1px solid #1D9E75;border-radius:8px;padding:11px 14px;font-size:13px;color:#085041;margin-top:10px}
 .error-msg{display:none;background:#FCEBEB;border:1px solid #E24B4A;border-radius:8px;padding:11px 14px;font-size:13px;color:#501313;margin-top:10px}
-.stats-row{display:flex;gap:10px;margin-bottom:18px}
+/* DASHBOARD */
+.logout-btn{padding:6px 14px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:12px;cursor:pointer;font-family:inherit;float:right;margin-bottom:12px}
+.stats-row{display:flex;gap:10px;margin-bottom:18px;clear:both}
 .stat-card{flex:1;padding:14px;border-radius:12px;border:1px solid #d3d1c7;background:#fff;text-align:center}
 .stat-num{font-size:28px;font-weight:600;line-height:1}
 .stat-label{font-size:11px;color:#888780;margin-top:4px}
@@ -69,31 +78,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .planb-card{background:#FAEEDA;border:1px solid #BA7517;border-radius:12px;padding:16px;margin-bottom:16px}
 .planb-title{font-size:14px;font-weight:500;color:#412402;margin-bottom:8px}
 .planb-item{font-size:13px;color:#633806;padding:6px 10px;background:rgba(255,255,255,.5);border-radius:6px;margin-bottom:4px}
-.filter-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.filter-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
 .filter-row select{flex:1;min-width:120px;padding:7px 10px;border:1px solid #b4b2a9;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;font-family:inherit;outline:none}
 .action-btn{padding:7px 14px;border:1px solid #b4b2a9;border-radius:8px;background:#fff;color:#5f5e5a;font-size:12px;cursor:pointer;font-family:inherit;white-space:nowrap}
 .section-label{font-size:12px;font-weight:500;color:#888780;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
 .agent-list{display:flex;flex-direction:column;gap:6px}
 .dash-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:8px;border:1px solid #d3d1c7;background:#fff;gap:10px}
-.da-info{flex:1}
+.da-info{flex:1;min-width:0}
 .da-name{font-size:14px;font-weight:500}
 .da-meta{font-size:12px;color:#888780;margin-top:2px}
 .da-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .badge{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:500;white-space:nowrap}
 .badge.dispo{background:#E1F5EE;color:#085041}
 .badge.absent{background:#FAEEDA;color:#412402}
-.del-agent-btn{background:none;border:none;color:#b4b2a9;font-size:16px;cursor:pointer;padding:2px 4px;line-height:1}
-.del-agent-btn:hover{color:#E24B4A}
+.del-btn{background:none;border:1px solid #d3d1c7;border-radius:6px;color:#888780;font-size:14px;cursor:pointer;padding:4px 8px;line-height:1;font-family:inherit}
+.del-btn:hover{border-color:#E24B4A;color:#E24B4A}
 .empty-state{text-align:center;padding:36px 20px;color:#888780;font-size:14px}
 .loading-state{text-align:center;padding:24px;color:#888780;font-size:13px}
-.logout-btn{padding:6px 14px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:12px;cursor:pointer;font-family:inherit;float:right}
+/* CONFIG */
 .config-section{margin-bottom:24px}
 .config-title{font-size:14px;font-weight:500;margin-bottom:12px;color:#1a1a18}
 .config-card{background:#fff;border:1px solid #d3d1c7;border-radius:12px;padding:16px}
 .config-card label{display:block;font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:6px}
 .config-card input{width:100%;padding:9px 12px;border:1px solid #b4b2a9;border-radius:8px;background:#f5f5f3;color:#1a1a18;font-size:14px;font-family:inherit;outline:none;margin-bottom:10px}
+.config-card input:focus{border-color:#1D9E75;background:#fff}
 .save-btn{padding:8px 18px;background:#1D9E75;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit}
-.saved-note{display:none;font-size:12px;color:#1D9E75;margin-top:6px}
+.save-btn:hover{background:#0F6E56}
+.saved-note{display:none;font-size:12px;color:#1D9E75;margin-top:8px}
 .ref-card{border:1px solid #d3d1c7;border-radius:10px;background:#fff;overflow:hidden;margin-bottom:8px}
 .ref-view{display:flex;align-items:center;justify-content:space-between;padding:12px 14px}
 .ref-view-nom{font-size:14px;font-weight:500}
@@ -114,18 +125,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .reset-title{font-size:14px;font-weight:500;color:#501313;margin-bottom:6px}
 .reset-desc{font-size:13px;color:#791F1F;margin-bottom:12px;line-height:1.6}
 .reset-btn{padding:10px 20px;background:#E24B4A;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
+.reset-btn:hover{background:#A32D2D}
 </style>
 </head>
 <body>
+
 <div class="header">
   <h1>🌙 Marche de nuit</h1>
   <p>Déclaration de présence des agents</p>
 </div>
+
 <div class="container">
   <div class="tabs">
     <button class="tab-btn active" onclick="showTab('form')">Déclarer</button>
-    <button class="tab-btn" onclick="tryShowTab('dashboard')">Tableau de bord</button>
-    <button class="tab-btn" onclick="tryShowTab('admin')">Configuration</button>
+    <button class="tab-btn" onclick="showTab('dashboard')">Tableau de bord</button>
+    <button class="tab-btn" onclick="showTab('admin')">Configuration</button>
   </div>
 
   <!-- FORMULAIRE -->
@@ -136,6 +150,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="banner-date" id="banner-date-txt">Chargement...</div>
       </div>
     </div>
+
     <div class="mode-selector">
       <div class="mode-card selected" id="mode-agent" onclick="selectMode('agent')">
         <div class="mode-title">Je réponds pour moi</div>
@@ -146,10 +161,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="mode-desc">Référent / Encadrant</div>
       </div>
     </div>
+
+    <!-- AGENT -->
     <div id="form-agent" class="card">
       <div class="card-title">Ma disponibilité</div>
-      <div class="field"><label>Nom et prénom</label><input type="text" id="a-nom" placeholder="Ex : Martin Dupont"></div>
-      <div class="field"><label>Service</label><input type="text" id="a-service" placeholder="Ex : Accueil, Sécurité..."></div>
+      <div class="field">
+        <label>Nom et prénom</label>
+        <input type="text" id="a-nom" placeholder="Ex : Martin Dupont">
+      </div>
+      <div class="field">
+        <label>Service</label>
+        <input type="text" id="a-service" placeholder="Ex : Accueil, Sécurité...">
+      </div>
       <div class="field">
         <label>Disponibilité</label>
         <div class="dispo-btns">
@@ -161,11 +184,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="success-msg" id="a-success">✓ Votre réponse a bien été enregistrée !</div>
       <div class="error-msg" id="a-error">Une erreur est survenue. Réessayez.</div>
     </div>
+
+    <!-- REFERENT -->
     <div id="form-referent" class="card" style="display:none">
       <div class="card-title">Disponibilités de mon équipe</div>
       <div class="field">
         <label>Je suis</label>
-        <select id="r-select" onchange="onReferentChange()"><option value="">-- Sélectionnez votre nom --</option></select>
+        <select id="r-select" onchange="onReferentChange()">
+          <option value="">-- Sélectionnez votre nom --</option>
+        </select>
       </div>
       <div id="ref-self-section" style="display:none">
         <div class="field">
@@ -190,19 +217,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
   </div>
 
-  <!-- DASHBOARD -->
+  <!-- TABLEAU DE BORD -->
   <div id="panel-dashboard" class="panel">
     <div id="lock-dashboard" class="lock-screen">
       <div class="lock-icon">🔒</div>
       <div class="lock-title">Accès organisateurs</div>
-      <div class="lock-desc">Entrez le code d'accès pour voir le tableau de bord</div>
-      <input type="password" class="lock-input" id="code-dashboard" placeholder="••••" maxlength="10" onkeydown="if(event.key==='Enter')unlockDash()">
-      <br><button class="lock-btn" onclick="unlockDash()">Accéder</button>
+      <div class="lock-desc">Entrez le code pour accéder au tableau de bord</div>
+      <input type="password" class="lock-input" id="code-dashboard" placeholder="••••" maxlength="10">
+      <br>
+      <button class="lock-btn" onclick="unlockDash()">Accéder</button>
       <div class="lock-error" id="lock-error-dash">Code incorrect ❌</div>
     </div>
     <div id="content-dashboard" style="display:none">
       <button class="logout-btn" onclick="lockTab('dashboard')">🔒 Verrouiller</button>
-      <br><br>
       <div class="stats-row">
         <div class="stat-card green"><div class="stat-num" id="count-dispo">-</div><div class="stat-label">Disponibles</div></div>
         <div class="stat-card amber"><div class="stat-num" id="count-absent">-</div><div class="stat-label">Absents</div></div>
@@ -217,27 +244,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="filter-row">
         <select id="filter-date" onchange="renderDash()"><option value="">Toutes les dates</option></select>
         <select id="filter-service" onchange="renderDash()"><option value="">Tous les services</option></select>
-        <button class="action-btn" onclick="exportCSV()">📥 CSV</button>
         <button class="action-btn" onclick="loadAndRenderDash()">🔄 Actualiser</button>
+        <button class="action-btn" onclick="exportCSV()">📥 CSV</button>
       </div>
       <div class="section-label">Liste des agents</div>
-      <div class="agent-list" id="agent-list"><div class="loading-state">Chargement...</div></div>
+      <div class="agent-list" id="agent-list">
+        <div class="loading-state">Chargement...</div>
+      </div>
     </div>
   </div>
 
-  <!-- ADMIN -->
+  <!-- CONFIGURATION -->
   <div id="panel-admin" class="panel">
     <div id="lock-admin" class="lock-screen">
       <div class="lock-icon">⚙️</div>
       <div class="lock-title">Accès configuration</div>
-      <div class="lock-desc">Entrez le code d'accès pour modifier la configuration</div>
-      <input type="password" class="lock-input" id="code-admin" placeholder="••••" maxlength="10" onkeydown="if(event.key==='Enter')unlockAdmin()">
-      <br><button class="lock-btn" onclick="unlockAdmin()">Accéder</button>
+      <div class="lock-desc">Entrez le code pour accéder à la configuration</div>
+      <input type="password" class="lock-input" id="code-admin" placeholder="••••" maxlength="10">
+      <br>
+      <button class="lock-btn" onclick="unlockAdmin()">Accéder</button>
       <div class="lock-error" id="lock-error-admin">Code incorrect ❌</div>
     </div>
     <div id="content-admin" style="display:none">
       <button class="logout-btn" onclick="lockTab('admin')">🔒 Verrouiller</button>
-      <br><br>
+      <br style="clear:both">
+
       <div class="config-section">
         <div class="config-title">Date de la prochaine marche</div>
         <div class="config-card">
@@ -247,15 +278,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <div class="saved-note" id="date-saved-note">✓ Date enregistrée !</div>
         </div>
       </div>
+
       <div class="config-section">
         <div class="config-title">Code d'accès organisateurs</div>
         <div class="config-card">
           <label>Modifier le code (tableau de bord + configuration)</label>
-          <input type="text" id="new-code" placeholder="Nouveau code">
+          <input type="text" id="new-code" placeholder="Nouveau code (ex: 5678)">
           <button class="save-btn" onclick="saveCode()">Enregistrer</button>
           <div class="saved-note" id="code-saved-note">✓ Code modifié !</div>
         </div>
       </div>
+
       <div class="config-section">
         <div class="config-title">Référents et encadrants</div>
         <div id="referent-list"></div>
@@ -265,12 +298,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <button onclick="addReferent()">+ Ajouter</button>
         </div>
       </div>
+
       <div class="config-section">
         <div class="reset-section">
           <div class="reset-title">🗑️ Remise à zéro après la marche</div>
           <div class="reset-desc">Efface toutes les réponses des agents une fois la marche terminée. La configuration (référents, date, code) reste intacte.</div>
           <button class="reset-btn" onclick="resetResponses()">Effacer toutes les réponses</button>
-          <div class="saved-note" id="reset-note" style="color:#E24B4A;margin-top:8px">✓ Réponses effacées ! Prêt pour la prochaine marche.</div>
+          <div class="saved-note" id="reset-note" style="color:#E24B4A">✓ Réponses effacées !</div>
         </div>
       </div>
     </div>
@@ -278,334 +312,442 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <script>
-const SCRIPT_URL='https://script.google.com/macros/s/AKfycbwjLttxuI7AutnsqtdbWcZyUsM_xqxhD40_UmstdN4dNyNPvq8jCwzaJ37a75WsF57i/exec';
-let config={marcheDate:'',referents:[],accessCode:'1234'};
-let responses=[];
-let agentDispo=null,selfDispo=null,agentRowCount=0;
-let dashUnlocked=false,adminUnlocked=false;
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwjLttxuI7AutnsqtdbWcZyUsM_xqxhD40_UmstdN4dNyNPvq8jCwzaJ37a75WsF57i/exec';
+var config = { marcheDate: '', referents: [], accessCode: '1234' };
+var responses = [];
+var agentDispo = null;
+var selfDispo = null;
+var agentRowCount = 0;
+var dashUnlocked = false;
+var adminUnlocked = false;
 
-async function api(params){
-  const url=SCRIPT_URL+'?'+new URLSearchParams(params);
-  const res=await fetch(url);
-  return res.json();
+function api(params) {
+  var url = SCRIPT_URL + '?' + new URLSearchParams(params).toString();
+  return fetch(url).then(function(r){ return r.json(); });
 }
 
-async function init(){
-  try{config=await api({action:'getConfig'});updateBanner();}catch(e){console.error(e);}
+function init() {
+  api({ action: 'getConfig' }).then(function(data) {
+    config = data;
+    updateBanner();
+  }).catch(function(e){ console.error(e); });
 }
 init();
 
-function updateBanner(){
-  document.getElementById('banner-date-txt').textContent=config.marcheDate?fmtDate(config.marcheDate):'Aucune date configurée';
+function updateBanner() {
+  var el = document.getElementById('banner-date-txt');
+  el.textContent = config.marcheDate ? fmtDate(config.marcheDate) : 'Aucune date configurée';
 }
 
-function showTab(tab){
-  ['form','dashboard','admin'].forEach((t,i)=>{
-    document.getElementById('panel-'+t).classList.toggle('active',t===tab);
-    document.querySelectorAll('.tab-btn')[i].classList.toggle('active',t===tab);
+function showTab(tab) {
+  var tabs = ['form', 'dashboard', 'admin'];
+  tabs.forEach(function(t, i) {
+    document.getElementById('panel-' + t).classList.toggle('active', t === tab);
+    document.querySelectorAll('.tab-btn')[i].classList.toggle('active', t === tab);
   });
+  if (tab === 'dashboard' && dashUnlocked) loadAndRenderDash();
+  if (tab === 'admin' && adminUnlocked) renderAdmin();
 }
 
-function tryShowTab(tab){
-  showTab(tab);
-  if(tab==='dashboard'&&dashUnlocked)loadAndRenderDash();
-  if(tab==='admin'&&adminUnlocked)renderAdmin();
-}
-
-function unlockDash(){
-  const code=document.getElementById('code-dashboard').value;
-  if(code===config.accessCode){
-    dashUnlocked=true;
-    document.getElementById('lock-dashboard').style.display='none';
-    document.getElementById('content-dashboard').style.display='block';
-    document.getElementById('code-dashboard').value='';
+// LOCK
+function unlockDash() {
+  var code = document.getElementById('code-dashboard').value;
+  if (code === config.accessCode) {
+    dashUnlocked = true;
+    document.getElementById('lock-dashboard').style.display = 'none';
+    document.getElementById('content-dashboard').style.display = 'block';
+    document.getElementById('code-dashboard').value = '';
     loadAndRenderDash();
-  }else{
-    const el=document.getElementById('lock-error-dash');
-    el.style.display='block';setTimeout(()=>el.style.display='none',2000);
+  } else {
+    var el = document.getElementById('lock-error-dash');
+    el.style.display = 'block';
+    setTimeout(function(){ el.style.display = 'none'; }, 2000);
   }
 }
 
-function unlockAdmin(){
-  const code=document.getElementById('code-admin').value;
-  if(code===config.accessCode){
-    adminUnlocked=true;
-    document.getElementById('lock-admin').style.display='none';
-    document.getElementById('content-admin').style.display='block';
-    document.getElementById('code-admin').value='';
+function unlockAdmin() {
+  var code = document.getElementById('code-admin').value;
+  if (code === config.accessCode) {
+    adminUnlocked = true;
+    document.getElementById('lock-admin').style.display = 'none';
+    document.getElementById('content-admin').style.display = 'block';
+    document.getElementById('code-admin').value = '';
     renderAdmin();
-  }else{
-    const el=document.getElementById('lock-error-admin');
-    el.style.display='block';setTimeout(()=>el.style.display='none',2000);
+  } else {
+    var el = document.getElementById('lock-error-admin');
+    el.style.display = 'block';
+    setTimeout(function(){ el.style.display = 'none'; }, 2000);
   }
 }
 
-function lockTab(tab){
-  if(tab==='dashboard'){
-    dashUnlocked=false;
-    document.getElementById('lock-dashboard').style.display='block';
-    document.getElementById('content-dashboard').style.display='none';
-  }else{
-    adminUnlocked=false;
-    document.getElementById('lock-admin').style.display='block';
-    document.getElementById('content-admin').style.display='none';
+function lockTab(tab) {
+  if (tab === 'dashboard') {
+    dashUnlocked = false;
+    document.getElementById('lock-dashboard').style.display = 'block';
+    document.getElementById('content-dashboard').style.display = 'none';
+  } else {
+    adminUnlocked = false;
+    document.getElementById('lock-admin').style.display = 'block';
+    document.getElementById('content-admin').style.display = 'none';
   }
 }
 
-function selectMode(mode){
-  document.getElementById('mode-agent').classList.toggle('selected',mode==='agent');
-  document.getElementById('mode-referent').classList.toggle('selected',mode==='referent');
-  document.getElementById('form-agent').style.display=mode==='agent'?'':'none';
-  document.getElementById('form-referent').style.display=mode==='referent'?'':'none';
-  if(mode==='referent')populateRefSelect();
+// MODE
+function selectMode(mode) {
+  document.getElementById('mode-agent').classList.toggle('selected', mode === 'agent');
+  document.getElementById('mode-referent').classList.toggle('selected', mode === 'referent');
+  document.getElementById('form-agent').style.display = mode === 'agent' ? '' : 'none';
+  document.getElementById('form-referent').style.display = mode === 'referent' ? '' : 'none';
+  if (mode === 'referent') populateRefSelect();
 }
 
-function populateRefSelect(){
-  const sel=document.getElementById('r-select');
-  sel.innerHTML='<option value="">-- Sélectionnez votre nom --</option>';
-  (config.referents||[]).forEach(r=>{
-    const o=document.createElement('option');
-    o.value=r.id;o.textContent=r.nom+' — '+r.service;sel.appendChild(o);
+function populateRefSelect() {
+  var sel = document.getElementById('r-select');
+  sel.innerHTML = '<option value="">-- Sélectionnez votre nom --</option>';
+  (config.referents || []).forEach(function(r) {
+    var o = document.createElement('option');
+    o.value = r.id;
+    o.textContent = r.nom + ' — ' + r.service;
+    sel.appendChild(o);
   });
 }
 
-function onReferentChange(){
-  const ref=(config.referents||[]).find(r=>r.id===document.getElementById('r-select').value);
-  selfDispo=null;agentRowCount=0;
-  document.getElementById('self-btn-dispo').className='tg-btn';
-  document.getElementById('self-btn-absent').className='tg-btn';
-  document.getElementById('agents-block').innerHTML='';
-  if(!ref){document.getElementById('ref-self-section').style.display='none';return;}
-  document.getElementById('ref-self-name').textContent=ref.nom+' ('+ref.service+')';
-  document.getElementById('ref-self-section').style.display='';
-  addAgentRow();addAgentRow();
+function onReferentChange() {
+  var refId = document.getElementById('r-select').value;
+  var ref = (config.referents || []).find(function(r){ return r.id === refId; });
+  selfDispo = null;
+  agentRowCount = 0;
+  document.getElementById('self-btn-dispo').className = 'tg-btn';
+  document.getElementById('self-btn-absent').className = 'tg-btn';
+  document.getElementById('agents-block').innerHTML = '';
+  if (!ref) { document.getElementById('ref-self-section').style.display = 'none'; return; }
+  document.getElementById('ref-self-name').textContent = ref.nom + ' (' + ref.service + ')';
+  document.getElementById('ref-self-section').style.display = '';
+  addAgentRow(); addAgentRow();
 }
 
-function addAgentRow(){
-  const id=agentRowCount++;
-  const div=document.createElement('div');
-  div.className='agent-row-form';div.id='arow-'+id;
-  div.innerHTML=`<input type="text" placeholder="Nom de l'agent" id="aname-${id}">
-    <div class="toggle-group">
-      <button class="tg-btn" id="atg-d-${id}" onclick="setRowDispo(${id},'dispo')">✓</button>
-      <button class="tg-btn" id="atg-a-${id}" onclick="setRowDispo(${id},'absent')">✗</button>
-    </div>
-    <button class="remove-row-btn" onclick="removeAgentRow(${id})">×</button>`;
+function addAgentRow() {
+  var id = agentRowCount++;
+  var div = document.createElement('div');
+  div.className = 'agent-row-form';
+  div.id = 'arow-' + id;
+  div.innerHTML = '<input type="text" placeholder="Nom de l\'agent" id="aname-' + id + '">'
+    + '<div class="toggle-group">'
+    + '<button class="tg-btn" id="atg-d-' + id + '" onclick="setRowDispo(' + id + ',\'dispo\')">✓</button>'
+    + '<button class="tg-btn" id="atg-a-' + id + '" onclick="setRowDispo(' + id + ',\'absent\')">✗</button>'
+    + '</div>'
+    + '<button class="remove-row-btn" onclick="removeAgentRow(' + id + ')">×</button>';
   document.getElementById('agents-block').appendChild(div);
 }
-function removeAgentRow(id){const el=document.getElementById('arow-'+id);if(el)el.remove();}
-function setRowDispo(id,val){
-  document.getElementById('arow-'+id).dataset.dispo=val;
-  document.getElementById('atg-d-'+id).className='tg-btn'+(val==='dispo'?' on-dispo':'');
-  document.getElementById('atg-a-'+id).className='tg-btn'+(val==='absent'?' on-absent':'');
-}
-function setSelfDispo(val){
-  selfDispo=val;
-  document.getElementById('self-btn-dispo').className='tg-btn'+(val==='dispo'?' on-dispo':'');
-  document.getElementById('self-btn-absent').className='tg-btn'+(val==='absent'?' on-absent':'');
-}
-function selectAgentDispo(val){
-  agentDispo=val;
-  document.getElementById('a-btn-dispo').className='dispo-btn'+(val==='dispo'?' sel-dispo':'');
-  document.getElementById('a-btn-absent').className='dispo-btn'+(val==='absent'?' sel-absent':'');
+
+function removeAgentRow(id) {
+  var el = document.getElementById('arow-' + id);
+  if (el) el.remove();
 }
 
-function getDate(){return config.marcheDate||new Date().toISOString().split('T')[0];}
-
-async function submitAgent(){
-  const nom=document.getElementById('a-nom').value.trim();
-  const service=document.getElementById('a-service').value.trim();
-  if(!nom||!agentDispo){alert('Veuillez renseigner votre nom et votre disponibilité.');return;}
-  const btn=document.getElementById('a-submit');
-  btn.disabled=true;btn.textContent='Enregistrement...';
-  try{
-    await api({action:'saveResponse',data:JSON.stringify({nom,service,date:getDate(),dispo:agentDispo,source:'agent',ts:Date.now()})});
-    document.getElementById('a-nom').value='';
-    document.getElementById('a-service').value='';
-    agentDispo=null;
-    document.getElementById('a-btn-dispo').className='dispo-btn';
-    document.getElementById('a-btn-absent').className='dispo-btn';
-    show('a-success',3000);
-  }catch(e){show('a-error',4000);}
-  btn.disabled=false;btn.textContent='Enregistrer';
+function setRowDispo(id, val) {
+  document.getElementById('arow-' + id).dataset.dispo = val;
+  document.getElementById('atg-d-' + id).className = 'tg-btn' + (val === 'dispo' ? ' on-dispo' : '');
+  document.getElementById('atg-a-' + id).className = 'tg-btn' + (val === 'absent' ? ' on-absent' : '');
 }
 
-async function submitReferent(){
-  const ref=(config.referents||[]).find(r=>r.id===document.getElementById('r-select').value);
-  if(!ref){alert('Veuillez sélectionner votre nom.');return;}
-  if(!selfDispo){alert('Veuillez indiquer votre propre disponibilité.');return;}
-  const rows=document.querySelectorAll('#agents-block .agent-row-form');
-  const entries=[];
-  for(const row of rows){
-    const id=row.id.replace('arow-','');
-    const nom=document.getElementById('aname-'+id).value.trim();
-    const dispo=row.dataset.dispo;
-    if(!nom)continue;
-    if(!dispo){alert('Disponibilité manquante pour "'+nom+'".');return;}
-    entries.push({nom,dispo});
+function setSelfDispo(val) {
+  selfDispo = val;
+  document.getElementById('self-btn-dispo').className = 'tg-btn' + (val === 'dispo' ? ' on-dispo' : '');
+  document.getElementById('self-btn-absent').className = 'tg-btn' + (val === 'absent' ? ' on-absent' : '');
+}
+
+function selectAgentDispo(val) {
+  agentDispo = val;
+  document.getElementById('a-btn-dispo').className = 'dispo-btn' + (val === 'dispo' ? ' sel-dispo' : '');
+  document.getElementById('a-btn-absent').className = 'dispo-btn' + (val === 'absent' ? ' sel-absent' : '');
+}
+
+function getDate() {
+  return config.marcheDate ? toISODate(config.marcheDate) : new Date().toISOString().split('T')[0];
+}
+
+function toISODate(d) {
+  if (!d) return '';
+  var s = String(d);
+  if (s.includes('T')) {
+    var dt = new Date(s);
+    var y = dt.getUTCFullYear();
+    var m = String(dt.getUTCMonth() + 1).padStart(2, '0');
+    var j = String(dt.getUTCDate()).padStart(2, '0');
+    return y + '-' + m + '-' + j;
   }
-  const btn=document.getElementById('r-submit');
-  btn.disabled=true;btn.textContent='Enregistrement...';
-  try{
-    const date=getDate();
-    await api({action:'saveResponse',data:JSON.stringify({nom:ref.nom,service:ref.service,date,dispo:selfDispo,source:'referent-self',ts:Date.now()})});
-    for(const e of entries){
-      await api({action:'saveResponse',data:JSON.stringify({nom:e.nom,service:ref.service,date,dispo:e.dispo,source:'via:'+ref.nom,ts:Date.now()})});
-    }
-    selfDispo=null;
-    document.getElementById('self-btn-dispo').className='tg-btn';
-    document.getElementById('self-btn-absent').className='tg-btn';
-    document.getElementById('agents-block').innerHTML='';
-    agentRowCount=0;addAgentRow();addAgentRow();
-    show('r-success',3500);
-  }catch(e){show('r-error',4000);}
-  btn.disabled=false;btn.textContent="Enregistrer toute l'équipe";
+  return s;
 }
 
-async function loadAndRenderDash(){
-  document.getElementById('agent-list').innerHTML='<div class="loading-state">Chargement...</div>';
-  try{responses=await api({action:'getResponses'});}catch(e){}
-  renderDash();
+function fmtDate(d) {
+  if (!d) return '';
+  var iso = toISODate(d);
+  var parts = iso.split('-');
+  if (parts.length === 3) return parts[2] + '/' + parts[1] + '/' + parts[0];
+  return iso;
 }
 
-function renderDash(){
-  const fDate=document.getElementById('filter-date').value;
-  const fService=document.getElementById('filter-service').value;
-  const dates=[...new Set(responses.map(r=>r.date))].sort().reverse();
-  const services=[...new Set(responses.map(r=>r.service).filter(Boolean))].sort();
-  const dSel=document.getElementById('filter-date');const curD=dSel.value;
-  dSel.innerHTML='<option value="">Toutes les dates</option>';
-  dates.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=fmtDate(d);if(d===curD)o.selected=true;dSel.appendChild(o);});
-  const sSel=document.getElementById('filter-service');const curS=sSel.value;
-  sSel.innerHTML='<option value="">Tous les services</option>';
-  services.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;if(s===curS)o.selected=true;sSel.appendChild(o);});
-  let data=responses;
-  if(fDate)data=data.filter(r=>r.date===fDate);
-  if(fService)data=data.filter(r=>r.service===fService);
-  const absents=data.filter(r=>r.dispo==='absent');
-  document.getElementById('count-dispo').textContent=data.filter(r=>r.dispo==='dispo').length;
-  document.getElementById('count-absent').textContent=absents.length;
-  document.getElementById('count-total').textContent=data.length;
-  const pb=document.getElementById('planb-section');
-  if(absents.length>0){
-    pb.style.display='';
-    document.getElementById('planb-list').innerHTML=absents.map(r=>`<div class="planb-item">✗ ${r.nom} (${r.service||'?'}) — à remplacer</div>`).join('');
-  }else{pb.style.display='none';}
-  const list=document.getElementById('agent-list');
-  if(!data.length){list.innerHTML='<div class="empty-state">Aucune réponse pour ces critères.</div>';return;}
-  const sorted=[...data].sort((a,b)=>{if(a.dispo!==b.dispo)return a.dispo==='dispo'?-1:1;return a.nom.localeCompare(b.nom);});
-  const srcLabel=s=>{if(!s||s==='agent')return 'Direct';if(s==='referent-self')return 'Référent';if(s.startsWith('via:'))return 'Via '+s.slice(4);return s;};
-  list.innerHTML=sorted.map(r=>`
-    <div class="dash-row">
-      <div class="da-info">
-        <div class="da-name">${r.nom}</div>
-        <div class="da-meta">${r.service||'?'} · ${fmtDate(r.date)} · ${srcLabel(r.source)}</div>
-      </div>
-      <div class="da-actions">
-        <span class="badge ${r.dispo}">${r.dispo==='dispo'?'Disponible':'Absent'}</span>
-        <button class="del-agent-btn" onclick="deleteAgent('${r.nom.replace(/'/g,"\\'")}','${r.date}')" title="Supprimer">🗑️</button>
-      </div>
-    </div>`).join('');
+// SUBMIT AGENT
+function submitAgent() {
+  var nom = document.getElementById('a-nom').value.trim();
+  var service = document.getElementById('a-service').value.trim();
+  if (!nom || !agentDispo) { alert('Veuillez renseigner votre nom et votre disponibilité.'); return; }
+  var btn = document.getElementById('a-submit');
+  btn.disabled = true; btn.textContent = 'Enregistrement...';
+  var entry = { nom: nom, service: service, date: getDate(), dispo: agentDispo, source: 'agent', ts: Date.now() };
+  api({ action: 'saveResponse', data: JSON.stringify(entry) }).then(function() {
+    document.getElementById('a-nom').value = '';
+    document.getElementById('a-service').value = '';
+    agentDispo = null;
+    document.getElementById('a-btn-dispo').className = 'dispo-btn';
+    document.getElementById('a-btn-absent').className = 'dispo-btn';
+    showMsg('a-success', 3000);
+    btn.disabled = false; btn.textContent = 'Enregistrer';
+  }).catch(function() {
+    showMsg('a-error', 4000);
+    btn.disabled = false; btn.textContent = 'Enregistrer';
+  });
 }
 
-async function deleteAgent(nom,date){
-  if(!confirm('Supprimer la réponse de "'+nom+'" ?'))return;
-    await api({action:'deleteResponse',nom:nom,date:cleanDate(date)});
-    await api({action:'deleteResponse',nom,date});
-    await loadAndRenderDash();
-  }catch(e){alert('Erreur lors de la suppression.');}
+// SUBMIT REFERENT
+function submitReferent() {
+  var refId = document.getElementById('r-select').value;
+  var ref = (config.referents || []).find(function(r){ return r.id === refId; });
+  if (!ref) { alert('Veuillez sélectionner votre nom.'); return; }
+  if (!selfDispo) { alert('Veuillez indiquer votre propre disponibilité.'); return; }
+  var rows = document.querySelectorAll('#agents-block .agent-row-form');
+  var entries = [];
+  for (var i = 0; i < rows.length; i++) {
+    var rowId = rows[i].id.replace('arow-', '');
+    var nom = document.getElementById('aname-' + rowId).value.trim();
+    var dispo = rows[i].dataset.dispo;
+    if (!nom) continue;
+    if (!dispo) { alert('Disponibilité manquante pour "' + nom + '".'); return; }
+    entries.push({ nom: nom, dispo: dispo });
+  }
+  var btn = document.getElementById('r-submit');
+  btn.disabled = true; btn.textContent = 'Enregistrement...';
+  var date = getDate();
+  var selfEntry = { nom: ref.nom, service: ref.service, date: date, dispo: selfDispo, source: 'referent-self', ts: Date.now() };
+  var promises = [api({ action: 'saveResponse', data: JSON.stringify(selfEntry) })];
+  entries.forEach(function(e) {
+    promises.push(api({ action: 'saveResponse', data: JSON.stringify({ nom: e.nom, service: ref.service, date: date, dispo: e.dispo, source: 'via:' + ref.nom, ts: Date.now() }) }));
+  });
+  Promise.all(promises).then(function() {
+    selfDispo = null;
+    document.getElementById('self-btn-dispo').className = 'tg-btn';
+    document.getElementById('self-btn-absent').className = 'tg-btn';
+    document.getElementById('agents-block').innerHTML = '';
+    agentRowCount = 0; addAgentRow(); addAgentRow();
+    showMsg('r-success', 3500);
+    btn.disabled = false; btn.textContent = "Enregistrer toute l'équipe";
+  }).catch(function() {
+    showMsg('r-error', 4000);
+    btn.disabled = false; btn.textContent = "Enregistrer toute l'équipe";
+  });
 }
 
-function exportCSV(){
-  if(!responses.length){alert('Aucune donnée à exporter.');return;}
-  const rows=[['Nom','Service','Date','Disponibilité','Source']];
-  responses.forEach(r=>rows.push([r.nom,r.service||'',r.date,r.dispo==='dispo'?'Disponible':'Absent',r.source||'']));
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.map(r=>r.join(';')).join('\n'));
-  a.download='marche_nuit.csv';a.click();
+// DASHBOARD
+function loadAndRenderDash() {
+  document.getElementById('agent-list').innerHTML = '<div class="loading-state">Chargement...</div>';
+  api({ action: 'getResponses' }).then(function(data) {
+    responses = data || [];
+    renderDash();
+  }).catch(function() {
+    document.getElementById('agent-list').innerHTML = '<div class="empty-state">Erreur de chargement.</div>';
+  });
 }
 
-function renderAdmin(){
-  if(config.marcheDate)document.getElementById('admin-date').value=config.marcheDate;
-  const list=document.getElementById('referent-list');
-  list.innerHTML=(config.referents||[]).map(ref=>`
-    <div class="ref-card">
-      <div class="ref-view">
-        <div><div class="ref-view-nom">${ref.nom}</div><div class="ref-view-svc">${ref.service}</div></div>
-        <div class="ref-actions">
-          <button class="btn-edit" onclick="openEdit('${ref.id}')">Modifier</button>
-          <button class="btn-del" onclick="delRef('${ref.id}')">Supprimer</button>
-        </div>
-      </div>
-      <div class="ref-edit-body" id="re-${ref.id}">
-        <div class="ref-edit-row">
-          <input type="text" id="re-nom-${ref.id}" value="${ref.nom}" placeholder="Nom">
-          <input type="text" id="re-svc-${ref.id}" value="${ref.service}" placeholder="Service">
-        </div>
-        <div style="display:flex;gap:8px">
-          <button class="save-btn" onclick="saveEdit('${ref.id}')">Enregistrer</button>
-          <button class="btn-edit" onclick="closeEdit('${ref.id}')">Annuler</button>
-        </div>
-      </div>
-    </div>`).join('');
+function renderDash() {
+  var fDate = document.getElementById('filter-date').value;
+  var fService = document.getElementById('filter-service').value;
+  var dates = [];
+  var services = [];
+  responses.forEach(function(r) {
+    var iso = toISODate(r.date);
+    if (iso && dates.indexOf(iso) === -1) dates.push(iso);
+    if (r.service && services.indexOf(r.service) === -1) services.push(r.service);
+  });
+  dates.sort().reverse();
+  services.sort();
+  var dSel = document.getElementById('filter-date');
+  var curD = dSel.value;
+  dSel.innerHTML = '<option value="">Toutes les dates</option>';
+  dates.forEach(function(d) {
+    var o = document.createElement('option');
+    o.value = d; o.textContent = fmtDate(d);
+    if (d === curD) o.selected = true;
+    dSel.appendChild(o);
+  });
+  var sSel = document.getElementById('filter-service');
+  var curS = sSel.value;
+  sSel.innerHTML = '<option value="">Tous les services</option>';
+  services.forEach(function(s) {
+    var o = document.createElement('option');
+    o.value = s; o.textContent = s;
+    if (s === curS) o.selected = true;
+    sSel.appendChild(o);
+  });
+  var data = responses.filter(function(r) {
+    var iso = toISODate(r.date);
+    if (fDate && iso !== fDate) return false;
+    if (fService && r.service !== fService) return false;
+    return true;
+  });
+  var absents = data.filter(function(r){ return r.dispo === 'absent'; });
+  document.getElementById('count-dispo').textContent = data.filter(function(r){ return r.dispo === 'dispo'; }).length;
+  document.getElementById('count-absent').textContent = absents.length;
+  document.getElementById('count-total').textContent = data.length;
+  var pb = document.getElementById('planb-section');
+  if (absents.length > 0) {
+    pb.style.display = '';
+    document.getElementById('planb-list').innerHTML = absents.map(function(r) {
+      return '<div class="planb-item">✗ ' + r.nom + ' (' + (r.service || '?') + ') — à remplacer</div>';
+    }).join('');
+  } else { pb.style.display = 'none'; }
+  var list = document.getElementById('agent-list');
+  if (!data.length) { list.innerHTML = '<div class="empty-state">Aucune réponse pour ces critères.</div>'; return; }
+  var sorted = data.slice().sort(function(a, b) {
+    if (a.dispo !== b.dispo) return a.dispo === 'dispo' ? -1 : 1;
+    return a.nom.localeCompare(b.nom);
+  });
+  list.innerHTML = sorted.map(function(r) {
+    var src = r.source;
+    var srcLabel = (!src || src === 'agent') ? 'Direct' : src === 'referent-self' ? 'Référent' : src.indexOf('via:') === 0 ? 'Via ' + src.slice(4) : src;
+    var isoDate = toISODate(r.date);
+    var safeName = r.nom.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    return '<div class="dash-row">'
+      + '<div class="da-info">'
+      + '<div class="da-name">' + r.nom + '</div>'
+      + '<div class="da-meta">' + (r.service || '?') + ' · ' + fmtDate(r.date) + ' · ' + srcLabel + '</div>'
+      + '</div>'
+      + '<div class="da-actions">'
+      + '<span class="badge ' + r.dispo + '">' + (r.dispo === 'dispo' ? 'Disponible' : 'Absent') + '</span>'
+      + '<button class="del-btn" onclick="deleteAgent(\'' + safeName + '\',\'' + isoDate + '\')">🗑</button>'
+      + '</div></div>';
+  }).join('');
 }
 
-function openEdit(id){(config.referents||[]).forEach(r=>closeEdit(r.id));document.getElementById('re-'+id).classList.add('open');}
-function closeEdit(id){const el=document.getElementById('re-'+id);if(el)el.classList.remove('open');}
-
-async function saveEdit(id){
-  const nom=document.getElementById('re-nom-'+id).value.trim();
-  const svc=document.getElementById('re-svc-'+id).value.trim();
-  if(!nom||!svc){alert('Champs obligatoires.');return;}
-  const ref=(config.referents||[]).find(r=>r.id===id);
-  if(ref){ref.nom=nom;ref.service=svc;await api({action:'saveConfig',data:JSON.stringify(config)});renderAdmin();}
+function deleteAgent(nom, date) {
+  if (!confirm('Supprimer la réponse de "' + nom + '" ?')) return;
+  api({ action: 'deleteResponse', nom: nom, date: date }).then(function() {
+    return api({ action: 'getResponses' });
+  }).then(function(data) {
+    responses = data || [];
+    renderDash();
+  }).catch(function() { alert('Erreur lors de la suppression.'); });
 }
 
-async function delRef(id){
-  if(!confirm('Supprimer ce référent ?'))return;
-  config.referents=(config.referents||[]).filter(r=>r.id!==id);
-  await api({action:'saveConfig',data:JSON.stringify(config)});renderAdmin();
+function exportCSV() {
+  if (!responses.length) { alert('Aucune donnée à exporter.'); return; }
+  var rows = [['Nom', 'Service', 'Date', 'Disponibilité', 'Source']];
+  responses.forEach(function(r) {
+    rows.push([r.nom, r.service || '', fmtDate(r.date), r.dispo === 'dispo' ? 'Disponible' : 'Absent', r.source || '']);
+  });
+  var csv = rows.map(function(r){ return r.join(';'); }).join('\n');
+  var a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'marche_nuit.csv'; a.click();
 }
 
-async function saveDate(){
-  const d=document.getElementById('admin-date').value;
-  if(!d){alert('Veuillez sélectionner une date.');return;}
-  config.marcheDate=d;
-  await api({action:'saveConfig',data:JSON.stringify(config)});
-  updateBanner();show('date-saved-note',2500);
+// ADMIN
+function renderAdmin() {
+  if (config.marcheDate) {
+    document.getElementById('admin-date').value = toISODate(config.marcheDate);
+  }
+  var list = document.getElementById('referent-list');
+  list.innerHTML = (config.referents || []).map(function(ref) {
+    return '<div class="ref-card">'
+      + '<div class="ref-view">'
+      + '<div><div class="ref-view-nom">' + ref.nom + '</div><div class="ref-view-svc">' + ref.service + '</div></div>'
+      + '<div class="ref-actions">'
+      + '<button class="btn-edit" onclick="openEdit(\'' + ref.id + '\')">Modifier</button>'
+      + '<button class="btn-del" onclick="delRef(\'' + ref.id + '\')">Supprimer</button>'
+      + '</div></div>'
+      + '<div class="ref-edit-body" id="re-' + ref.id + '">'
+      + '<div class="ref-edit-row">'
+      + '<input type="text" id="re-nom-' + ref.id + '" value="' + ref.nom + '" placeholder="Nom">'
+      + '<input type="text" id="re-svc-' + ref.id + '" value="' + ref.service + '" placeholder="Service">'
+      + '</div>'
+      + '<div style="display:flex;gap:8px">'
+      + '<button class="save-btn" onclick="saveEdit(\'' + ref.id + '\')">Enregistrer</button>'
+      + '<button class="btn-edit" onclick="closeEdit(\'' + ref.id + '\')">Annuler</button>'
+      + '</div></div></div>';
+  }).join('');
 }
 
-async function saveCode(){
-  const code=document.getElementById('new-code').value.trim();
-  if(!code){alert('Le code ne peut pas être vide.');return;}
-  config.accessCode=code;
-  await api({action:'saveConfig',data:JSON.stringify(config)});
-  document.getElementById('new-code').value='';
-  show('code-saved-note',2500);
+function openEdit(id) {
+  (config.referents || []).forEach(function(r){ closeEdit(r.id); });
+  document.getElementById('re-' + id).classList.add('open');
+}
+function closeEdit(id) {
+  var el = document.getElementById('re-' + id);
+  if (el) el.classList.remove('open');
 }
 
-async function addReferent(){
-  const nom=document.getElementById('new-ref-nom').value.trim();
-  const svc=document.getElementById('new-ref-service').value.trim();
-  if(!nom||!svc){alert('Renseignez le nom et le service.');return;}
-  if(!config.referents)config.referents=[];
-  config.referents.push({id:'ref_'+Date.now(),nom,service:svc});
-  await api({action:'saveConfig',data:JSON.stringify(config)});
-  renderAdmin();
-  document.getElementById('new-ref-nom').value='';
-  document.getElementById('new-ref-service').value='';
+function saveEdit(id) {
+  var nom = document.getElementById('re-nom-' + id).value.trim();
+  var svc = document.getElementById('re-svc-' + id).value.trim();
+  if (!nom || !svc) { alert('Champs obligatoires.'); return; }
+  var ref = (config.referents || []).find(function(r){ return r.id === id; });
+  if (ref) {
+    ref.nom = nom; ref.service = svc;
+    api({ action: 'saveConfig', data: JSON.stringify(config) }).then(function(){ renderAdmin(); });
+  }
 }
 
-async function resetResponses(){
-  if(!confirm('Effacer TOUTES les réponses des agents ?\nCette action est irréversible.'))return;
-  await api({action:'resetResponses'});
-  responses=[];
-  show('reset-note',3000);
+function delRef(id) {
+  if (!confirm('Supprimer ce référent ?')) return;
+  config.referents = (config.referents || []).filter(function(r){ return r.id !== id; });
+  api({ action: 'saveConfig', data: JSON.stringify(config) }).then(function(){ renderAdmin(); });
 }
 
-function fmtDate(d){if(!d)return '';try{if(String(d).includes('T')){const dt=new Date(d);const j=String(dt.getUTCDate()).padStart(2,'0');const m=String(dt.getUTCMonth()+1).padStart(2,'0');const y=dt.getUTCFullYear();return j+'/'+m+'/'+y;}const[y,m,j]=String(d).split('-');return j+'/'+m+'/'+y;}catch(e){return String(d);}}
-function cleanDate(d){if(!d)return '';try{if(String(d).includes('T')){const dt=new Date(d);const j=String(dt.getUTCDate()).padStart(2,'0');const m=String(dt.getUTCMonth()+1).padStart(2,'0');const y=dt.getUTCFullYear();return y+'-'+m+'-'+j;}return String(d);}catch(e){return String(d);}}
-function show(id,ms){const el=document.getElementById(id);el.style.display='block';setTimeout(()=>el.style.display='none',ms);}
+function saveDate() {
+  var d = document.getElementById('admin-date').value;
+  if (!d) { alert('Veuillez sélectionner une date.'); return; }
+  config.marcheDate = d;
+  api({ action: 'saveConfig', data: JSON.stringify(config) }).then(function() {
+    updateBanner(); showMsg('date-saved-note', 2500);
+  });
+}
+
+function saveCode() {
+  var code = document.getElementById('new-code').value.trim();
+  if (!code) { alert('Le code ne peut pas être vide.'); return; }
+  config.accessCode = code;
+  api({ action: 'saveConfig', data: JSON.stringify(config) }).then(function() {
+    document.getElementById('new-code').value = '';
+    showMsg('code-saved-note', 2500);
+  });
+}
+
+function addReferent() {
+  var nom = document.getElementById('new-ref-nom').value.trim();
+  var svc = document.getElementById('new-ref-service').value.trim();
+  if (!nom || !svc) { alert('Renseignez le nom et le service.'); return; }
+  if (!config.referents) config.referents = [];
+  config.referents.push({ id: 'ref_' + Date.now(), nom: nom, service: svc });
+  api({ action: 'saveConfig', data: JSON.stringify(config) }).then(function() {
+    renderAdmin();
+    document.getElementById('new-ref-nom').value = '';
+    document.getElementById('new-ref-service').value = '';
+  });
+}
+
+function resetResponses() {
+  if (!confirm('Effacer TOUTES les réponses ?\nCette action est irréversible.')) return;
+  api({ action: 'resetResponses' }).then(function() {
+    responses = [];
+    showMsg('reset-note', 3000);
+  });
+}
+
+function showMsg(id, ms) {
+  var el = document.getElementById(id);
+  el.style.display = 'block';
+  setTimeout(function(){ el.style.display = 'none'; }, ms);
+}
 </script>
 </body>
 </html>
