@@ -3,226 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marche de nuit — Présence des agents</title>
+<title>Marche de nuit</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a18; min-height: 100vh; }
-  .header { background: #1D9E75; color: #fff; padding: 16px 20px; text-align: center; }
-  .header h1 { font-size: 20px; font-weight: 600; }
-  .header p { font-size: 13px; opacity: .85; margin-top: 3px; }
-  .container { max-width: 560px; margin: 0 auto; padding: 20px 16px 40px; }
-
-  .tabs { display: flex; gap: 6px; margin-bottom: 20px; background: #e8e6e0; border-radius: 10px; padding: 4px; }
-  .tab-btn {
-    flex: 1; padding: 8px; border-radius: 8px; border: none;
-    background: transparent; color: #5f5e5a; font-size: 13px;
-    cursor: pointer; font-family: inherit; transition: all .15s;
-  }
-  .tab-btn.active { background: #fff; color: #1a1a18; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
-  .panel { display: none; }
-  .panel.active { display: block; }
-
-  .banner {
-    display: flex; align-items: center; gap: 12px;
-    padding: 12px 16px; border-radius: 12px;
-    background: #E1F5EE; border: 1px solid #1D9E75; margin-bottom: 18px;
-  }
-  .banner-icon { font-size: 22px; }
-  .banner-label { font-size: 11px; color: #0F6E56; font-weight: 500; }
-  .banner-date { font-size: 16px; font-weight: 600; color: #085041; }
-
-  .mode-selector { display: flex; gap: 10px; margin-bottom: 18px; }
-  .mode-card {
-    flex: 1; padding: 12px; border-radius: 12px;
-    border: 1.5px solid #d3d1c7; background: #fff;
-    cursor: pointer; text-align: center; transition: all .15s;
-  }
-  .mode-card.selected { border-color: #1D9E75; background: #E1F5EE; }
-  .mode-title { font-size: 13px; font-weight: 500; color: #1a1a18; margin-bottom: 2px; }
-  .mode-card.selected .mode-title { color: #085041; }
-  .mode-desc { font-size: 11px; color: #888780; }
-  .mode-card.selected .mode-desc { color: #0F6E56; }
-
-  .card { background: #fff; border: 1px solid #d3d1c7; border-radius: 12px; padding: 18px; }
-  .card-title { font-size: 15px; font-weight: 500; margin-bottom: 16px; }
-  .field { margin-bottom: 14px; }
-  .field label { display: block; font-size: 12px; font-weight: 500; color: #5f5e5a; margin-bottom: 5px; }
-  .field input, .field select {
-    width: 100%; padding: 9px 12px; border: 1px solid #b4b2a9;
-    border-radius: 8px; background: #f5f5f3; color: #1a1a18;
-    font-size: 14px; font-family: inherit; outline: none;
-  }
-  .field input:focus, .field select:focus { border-color: #1D9E75; background: #fff; }
-
-  .dispo-btns { display: flex; gap: 10px; }
-  .dispo-btn {
-    flex: 1; padding: 10px; border-radius: 8px;
-    border: 1.5px solid #d3d1c7; background: #f5f5f3;
-    font-size: 14px; font-family: inherit; cursor: pointer; color: #5f5e5a; transition: all .15s;
-  }
-  .dispo-btn.sel-dispo { border-color: #1D9E75; background: #E1F5EE; color: #085041; font-weight: 500; }
-  .dispo-btn.sel-absent { border-color: #BA7517; background: #FAEEDA; color: #412402; font-weight: 500; }
-
-  .ref-self-block {
-    padding: 12px; border-radius: 8px; background: #f5f5f3;
-    border: 1px solid #d3d1c7; margin-bottom: 14px;
-  }
-  .ref-self-name { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
-  .toggle-group { display: flex; gap: 6px; }
-  .tg-btn {
-    padding: 5px 12px; border-radius: 99px; border: 1px solid #d3d1c7;
-    background: transparent; font-size: 12px; cursor: pointer;
-    font-family: inherit; color: #5f5e5a; transition: all .1s;
-  }
-  .tg-btn.on-dispo { background: #E1F5EE; border-color: #1D9E75; color: #085041; font-weight: 500; }
-  .tg-btn.on-absent { background: #FAEEDA; border-color: #BA7517; color: #412402; font-weight: 500; }
-
-  .agents-block { display: flex; flex-direction: column; gap: 8px; }
-  .agent-row-form {
-    display: flex; align-items: center; gap: 8px; padding: 9px 10px;
-    border-radius: 8px; border: 1px solid #d3d1c7; background: #f5f5f3;
-  }
-  .agent-row-form input[type="text"] {
-    flex: 1; padding: 5px 8px; font-size: 13px;
-    border: 1px solid #d3d1c7; border-radius: 6px;
-    background: #fff; color: #1a1a18; font-family: inherit; outline: none;
-  }
-  .remove-row-btn { background: none; border: none; color: #b4b2a9; font-size: 18px; cursor: pointer; padding: 0 2px; flex-shrink: 0; }
-  .add-row-btn {
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-    padding: 8px; border-radius: 8px; border: 1px dashed #b4b2a9;
-    background: transparent; color: #888780; font-size: 13px;
-    cursor: pointer; font-family: inherit; margin-top: 6px; width: 100%;
-  }
-
-  .submit-btn {
-    width: 100%; padding: 12px; background: #1D9E75; color: #fff;
-    border: none; border-radius: 8px; font-size: 14px; font-weight: 500;
-    font-family: inherit; cursor: pointer; margin-top: 12px; transition: background .15s;
-  }
-  .submit-btn:hover { background: #0F6E56; }
-  .submit-btn:disabled { background: #b4b2a9; cursor: default; }
-
-  .success-msg {
-    display: none; background: #E1F5EE; border: 1px solid #1D9E75;
-    border-radius: 8px; padding: 11px 14px; font-size: 13px; color: #085041; margin-top: 10px;
-  }
-  .error-msg {
-    display: none; background: #FCEBEB; border: 1px solid #E24B4A;
-    border-radius: 8px; padding: 11px 14px; font-size: 13px; color: #501313; margin-top: 10px;
-  }
-
-  /* DASHBOARD */
-  .stats-row { display: flex; gap: 10px; margin-bottom: 18px; }
-  .stat-card {
-    flex: 1; padding: 14px; border-radius: 12px;
-    border: 1px solid #d3d1c7; background: #fff; text-align: center;
-  }
-  .stat-num { font-size: 28px; font-weight: 600; line-height: 1; }
-  .stat-label { font-size: 11px; color: #888780; margin-top: 4px; }
-  .stat-card.green .stat-num { color: #1D9E75; }
-  .stat-card.amber .stat-num { color: #BA7517; }
-  .stat-card.blue .stat-num { color: #185FA5; }
-
-  .filter-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-  .filter-row select {
-    flex: 1; min-width: 120px; padding: 7px 10px;
-    border: 1px solid #b4b2a9; border-radius: 8px; background: #fff;
-    color: #1a1a18; font-size: 13px; font-family: inherit; outline: none;
-  }
-  .export-btn {
-    padding: 7px 14px; border: 1px solid #b4b2a9; border-radius: 8px;
-    background: #fff; color: #5f5e5a; font-size: 12px; cursor: pointer; font-family: inherit;
-  }
-
-  .section-label { font-size: 12px; font-weight: 500; color: #888780; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em; }
-  .agent-list { display: flex; flex-direction: column; gap: 6px; }
-  .dash-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 14px; border-radius: 8px; border: 1px solid #d3d1c7; background: #fff;
-  }
-  .da-name { font-size: 14px; font-weight: 500; }
-  .da-meta { font-size: 12px; color: #888780; margin-top: 2px; }
-  .badge { padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 500; }
-  .badge.dispo { background: #E1F5EE; color: #085041; }
-  .badge.absent { background: #FAEEDA; color: #412402; }
-  .empty-state { text-align: center; padding: 36px 20px; color: #888780; font-size: 14px; }
-  .loading-state { text-align: center; padding: 24px; color: #888780; font-size: 13px; }
-
-  /* PLAN B */
-  .planb-card {
-    background: #FAEEDA; border: 1px solid #BA7517;
-    border-radius: 12px; padding: 16px; margin-bottom: 16px;
-  }
-  .planb-title { font-size: 14px; font-weight: 500; color: #412402; margin-bottom: 8px; }
-  .planb-list { display: flex; flex-direction: column; gap: 6px; }
-  .planb-item { font-size: 13px; color: #633806; padding: 6px 10px; background: rgba(255,255,255,.5); border-radius: 6px; }
-
-  /* ADMIN */
-  .config-section { margin-bottom: 24px; }
-  .config-title { font-size: 14px; font-weight: 500; margin-bottom: 12px; }
-  .config-card { background: #fff; border: 1px solid #d3d1c7; border-radius: 12px; padding: 16px; margin-bottom: 10px; }
-  .save-btn {
-    margin-top: 10px; padding: 8px 18px; background: #1D9E75; color: #fff;
-    border: none; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit;
-  }
-  .ref-card { border: 1px solid #d3d1c7; border-radius: 10px; background: #fff; overflow: hidden; margin-bottom: 8px; }
-  .ref-view { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; }
-  .ref-view-nom { font-size: 14px; font-weight: 500; }
-  .ref-view-svc { font-size: 12px; color: #888780; }
-  .ref-actions { display: flex; gap: 8px; }
-  .btn-edit { padding: 5px 12px; border-radius: 6px; border: 1px solid #d3d1c7; background: transparent; color: #5f5e5a; font-size: 12px; cursor: pointer; font-family: inherit; }
-  .btn-edit:hover { border-color: #185FA5; color: #185FA5; }
-  .btn-del { padding: 5px 10px; border-radius: 6px; border: 1px solid #d3d1c7; background: transparent; color: #b4b2a9; font-size: 12px; cursor: pointer; font-family: inherit; }
-  .btn-del:hover { border-color: #E24B4A; color: #E24B4A; }
-  .ref-edit-body { display: none; padding: 0 14px 12px; border-top: 1px solid #e8e6e0; }
-  .ref-edit-body.open { display: block; padding-top: 12px; }
-  .ref-edit-row { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
-  .ref-edit-row input {
-    flex: 1; min-width: 120px; padding: 7px 10px; border: 1px solid #b4b2a9;
-    border-radius: 8px; background: #f5f5f3; color: #1a1a18; font-size: 13px; font-family: inherit; outline: none;
-  }
-  .add-ref-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-  .add-ref-row input {
-    flex: 1; min-width: 120px; padding: 8px 10px; border: 1px solid #b4b2a9;
-    border-radius: 8px; background: #fff; color: #1a1a18; font-size: 13px; font-family: inherit; outline: none;
-  }
-  .add-ref-row button {
-    padding: 8px 14px; background: #185FA5; color: #fff;
-    border: none; border-radius: 8px; font-size: 13px; cursor: pointer; font-family: inherit;
-  }
-  .saved-note { display: none; font-size: 12px; color: #1D9E75; margin-top: 6px; }
-
-  @media (max-width: 400px) {
-    .stats-row { flex-wrap: wrap; }
-    .stat-card { min-width: calc(50% - 5px); }
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f3;color:#1a1a18;min-height:100vh}
+.header{background:#1D9E75;color:#fff;padding:16px 20px;text-align:center}
+.header h1{font-size:20px;font-weight:600}
+.header p{font-size:13px;opacity:.85;margin-top:3px}
+.container{max-width:560px;margin:0 auto;padding:20px 16px 40px}
+.tabs{display:flex;gap:6px;margin-bottom:20px;background:#e8e6e0;border-radius:10px;padding:4px}
+.tab-btn{flex:1;padding:8px;border-radius:8px;border:none;background:transparent;color:#5f5e5a;font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s}
+.tab-btn.active{background:#fff;color:#1a1a18;font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.panel{display:none}.panel.active{display:block}
+.lock-screen{text-align:center;padding:40px 20px}
+.lock-icon{font-size:48px;margin-bottom:16px}
+.lock-title{font-size:18px;font-weight:500;margin-bottom:8px}
+.lock-desc{font-size:13px;color:#888780;margin-bottom:24px}
+.lock-input{width:100%;max-width:240px;padding:12px;text-align:center;font-size:20px;letter-spacing:8px;border:2px solid #d3d1c7;border-radius:12px;background:#fff;font-family:inherit;outline:none;margin-bottom:12px}
+.lock-input:focus{border-color:#1D9E75}
+.lock-btn{padding:11px 32px;background:#1D9E75;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
+.lock-error{font-size:13px;color:#E24B4A;margin-top:8px;display:none}
+.banner{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;background:#E1F5EE;border:1px solid #1D9E75;margin-bottom:18px}
+.banner-label{font-size:11px;color:#0F6E56;font-weight:500}
+.banner-date{font-size:16px;font-weight:600;color:#085041}
+.mode-selector{display:flex;gap:10px;margin-bottom:18px}
+.mode-card{flex:1;padding:12px;border-radius:12px;border:1.5px solid #d3d1c7;background:#fff;cursor:pointer;text-align:center;transition:all .15s}
+.mode-card.selected{border-color:#1D9E75;background:#E1F5EE}
+.mode-title{font-size:13px;font-weight:500;color:#1a1a18;margin-bottom:2px}
+.mode-card.selected .mode-title{color:#085041}
+.mode-desc{font-size:11px;color:#888780}
+.mode-card.selected .mode-desc{color:#0F6E56}
+.card{background:#fff;border:1px solid #d3d1c7;border-radius:12px;padding:18px}
+.card-title{font-size:15px;font-weight:500;margin-bottom:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:5px}
+.field input,.field select{width:100%;padding:9px 12px;border:1px solid #b4b2a9;border-radius:8px;background:#f5f5f3;color:#1a1a18;font-size:14px;font-family:inherit;outline:none}
+.field input:focus,.field select:focus{border-color:#1D9E75;background:#fff}
+.dispo-btns{display:flex;gap:10px}
+.dispo-btn{flex:1;padding:10px;border-radius:8px;border:1.5px solid #d3d1c7;background:#f5f5f3;font-size:14px;font-family:inherit;cursor:pointer;color:#5f5e5a;transition:all .15s}
+.dispo-btn.sel-dispo{border-color:#1D9E75;background:#E1F5EE;color:#085041;font-weight:500}
+.dispo-btn.sel-absent{border-color:#BA7517;background:#FAEEDA;color:#412402;font-weight:500}
+.ref-self-block{padding:12px;border-radius:8px;background:#f5f5f3;border:1px solid #d3d1c7;margin-bottom:14px}
+.ref-self-name{font-size:14px;font-weight:500;margin-bottom:8px}
+.toggle-group{display:flex;gap:6px}
+.tg-btn{padding:5px 12px;border-radius:99px;border:1px solid #d3d1c7;background:transparent;font-size:12px;cursor:pointer;font-family:inherit;color:#5f5e5a;transition:all .1s}
+.tg-btn.on-dispo{background:#E1F5EE;border-color:#1D9E75;color:#085041;font-weight:500}
+.tg-btn.on-absent{background:#FAEEDA;border-color:#BA7517;color:#412402;font-weight:500}
+.agents-block{display:flex;flex-direction:column;gap:8px}
+.agent-row-form{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;border:1px solid #d3d1c7;background:#f5f5f3}
+.agent-row-form input[type="text"]{flex:1;padding:5px 8px;font-size:13px;border:1px solid #d3d1c7;border-radius:6px;background:#fff;color:#1a1a18;font-family:inherit;outline:none}
+.remove-row-btn{background:none;border:none;color:#b4b2a9;font-size:18px;cursor:pointer;padding:0 2px;flex-shrink:0}
+.add-row-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;border-radius:8px;border:1px dashed #b4b2a9;background:transparent;color:#888780;font-size:13px;cursor:pointer;font-family:inherit;margin-top:6px;width:100%}
+.submit-btn{width:100%;padding:12px;background:#1D9E75;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;margin-top:12px;transition:background .15s}
+.submit-btn:hover{background:#0F6E56}
+.submit-btn:disabled{background:#b4b2a9;cursor:default}
+.success-msg{display:none;background:#E1F5EE;border:1px solid #1D9E75;border-radius:8px;padding:11px 14px;font-size:13px;color:#085041;margin-top:10px}
+.error-msg{display:none;background:#FCEBEB;border:1px solid #E24B4A;border-radius:8px;padding:11px 14px;font-size:13px;color:#501313;margin-top:10px}
+.stats-row{display:flex;gap:10px;margin-bottom:18px}
+.stat-card{flex:1;padding:14px;border-radius:12px;border:1px solid #d3d1c7;background:#fff;text-align:center}
+.stat-num{font-size:28px;font-weight:600;line-height:1}
+.stat-label{font-size:11px;color:#888780;margin-top:4px}
+.stat-card.green .stat-num{color:#1D9E75}
+.stat-card.amber .stat-num{color:#BA7517}
+.stat-card.blue .stat-num{color:#185FA5}
+.planb-card{background:#FAEEDA;border:1px solid #BA7517;border-radius:12px;padding:16px;margin-bottom:16px}
+.planb-title{font-size:14px;font-weight:500;color:#412402;margin-bottom:8px}
+.planb-item{font-size:13px;color:#633806;padding:6px 10px;background:rgba(255,255,255,.5);border-radius:6px;margin-bottom:4px}
+.filter-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.filter-row select{flex:1;min-width:120px;padding:7px 10px;border:1px solid #b4b2a9;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;font-family:inherit;outline:none}
+.action-btn{padding:7px 14px;border:1px solid #b4b2a9;border-radius:8px;background:#fff;color:#5f5e5a;font-size:12px;cursor:pointer;font-family:inherit;white-space:nowrap}
+.section-label{font-size:12px;font-weight:500;color:#888780;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+.agent-list{display:flex;flex-direction:column;gap:6px}
+.dash-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:8px;border:1px solid #d3d1c7;background:#fff;gap:10px}
+.da-info{flex:1}
+.da-name{font-size:14px;font-weight:500}
+.da-meta{font-size:12px;color:#888780;margin-top:2px}
+.da-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.badge{padding:3px 10px;border-radius:99px;font-size:12px;font-weight:500;white-space:nowrap}
+.badge.dispo{background:#E1F5EE;color:#085041}
+.badge.absent{background:#FAEEDA;color:#412402}
+.del-agent-btn{background:none;border:none;color:#b4b2a9;font-size:16px;cursor:pointer;padding:2px 4px;line-height:1}
+.del-agent-btn:hover{color:#E24B4A}
+.empty-state{text-align:center;padding:36px 20px;color:#888780;font-size:14px}
+.loading-state{text-align:center;padding:24px;color:#888780;font-size:13px}
+.logout-btn{padding:6px 14px;border:1px solid #d3d1c7;border-radius:8px;background:#fff;color:#5f5e5a;font-size:12px;cursor:pointer;font-family:inherit;float:right}
+.config-section{margin-bottom:24px}
+.config-title{font-size:14px;font-weight:500;margin-bottom:12px;color:#1a1a18}
+.config-card{background:#fff;border:1px solid #d3d1c7;border-radius:12px;padding:16px}
+.config-card label{display:block;font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:6px}
+.config-card input{width:100%;padding:9px 12px;border:1px solid #b4b2a9;border-radius:8px;background:#f5f5f3;color:#1a1a18;font-size:14px;font-family:inherit;outline:none;margin-bottom:10px}
+.save-btn{padding:8px 18px;background:#1D9E75;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit}
+.saved-note{display:none;font-size:12px;color:#1D9E75;margin-top:6px}
+.ref-card{border:1px solid #d3d1c7;border-radius:10px;background:#fff;overflow:hidden;margin-bottom:8px}
+.ref-view{display:flex;align-items:center;justify-content:space-between;padding:12px 14px}
+.ref-view-nom{font-size:14px;font-weight:500}
+.ref-view-svc{font-size:12px;color:#888780}
+.ref-actions{display:flex;gap:8px}
+.btn-edit{padding:5px 12px;border-radius:6px;border:1px solid #d3d1c7;background:transparent;color:#5f5e5a;font-size:12px;cursor:pointer;font-family:inherit}
+.btn-edit:hover{border-color:#185FA5;color:#185FA5}
+.btn-del{padding:5px 10px;border-radius:6px;border:1px solid #d3d1c7;background:transparent;color:#b4b2a9;font-size:12px;cursor:pointer;font-family:inherit}
+.btn-del:hover{border-color:#E24B4A;color:#E24B4A}
+.ref-edit-body{display:none;padding:12px 14px;border-top:1px solid #e8e6e0;background:#f5f5f3}
+.ref-edit-body.open{display:block}
+.ref-edit-row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.ref-edit-row input{flex:1;min-width:120px;padding:7px 10px;border:1px solid #b4b2a9;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;font-family:inherit;outline:none}
+.add-ref-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.add-ref-row input{flex:1;min-width:120px;padding:8px 10px;border:1px solid #b4b2a9;border-radius:8px;background:#fff;color:#1a1a18;font-size:13px;font-family:inherit;outline:none}
+.add-ref-row button{padding:8px 14px;background:#185FA5;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit}
+.reset-section{background:#FCEBEB;border:1px solid #E24B4A;border-radius:12px;padding:16px}
+.reset-title{font-size:14px;font-weight:500;color:#501313;margin-bottom:6px}
+.reset-desc{font-size:13px;color:#791F1F;margin-bottom:12px;line-height:1.6}
+.reset-btn{padding:10px 20px;background:#E24B4A;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
 </style>
 </head>
 <body>
-
 <div class="header">
   <h1>🌙 Marche de nuit</h1>
   <p>Déclaration de présence des agents</p>
 </div>
-
 <div class="container">
   <div class="tabs">
     <button class="tab-btn active" onclick="showTab('form')">Déclarer</button>
-    <button class="tab-btn" onclick="showTab('dashboard')">Tableau de bord</button>
-    <button class="tab-btn" onclick="showTab('admin')">Configuration</button>
+    <button class="tab-btn" onclick="tryShowTab('dashboard')">Tableau de bord</button>
+    <button class="tab-btn" onclick="tryShowTab('admin')">Configuration</button>
   </div>
 
   <!-- FORMULAIRE -->
   <div id="panel-form" class="panel active">
     <div class="banner">
-      <div class="banner-icon">📅</div>
       <div>
-        <div class="banner-label">Prochaine marche de nuit</div>
+        <div class="banner-label">📅 Prochaine marche de nuit</div>
         <div class="banner-date" id="banner-date-txt">Chargement...</div>
       </div>
     </div>
-
     <div class="mode-selector">
       <div class="mode-card selected" id="mode-agent" onclick="selectMode('agent')">
         <div class="mode-title">Je réponds pour moi</div>
@@ -233,7 +146,6 @@
         <div class="mode-desc">Référent / Encadrant</div>
       </div>
     </div>
-
     <div id="form-agent" class="card">
       <div class="card-title">Ma disponibilité</div>
       <div class="field"><label>Nom et prénom</label><input type="text" id="a-nom" placeholder="Ex : Martin Dupont"></div>
@@ -246,17 +158,14 @@
         </div>
       </div>
       <button class="submit-btn" id="a-submit" onclick="submitAgent()">Enregistrer</button>
-      <div class="success-msg" id="a-success">Votre réponse a bien été enregistrée !</div>
+      <div class="success-msg" id="a-success">✓ Votre réponse a bien été enregistrée !</div>
       <div class="error-msg" id="a-error">Une erreur est survenue. Réessayez.</div>
     </div>
-
     <div id="form-referent" class="card" style="display:none">
       <div class="card-title">Disponibilités de mon équipe</div>
       <div class="field">
         <label>Je suis</label>
-        <select id="r-select" onchange="onReferentChange()">
-          <option value="">-- Sélectionnez votre nom --</option>
-        </select>
+        <select id="r-select" onchange="onReferentChange()"><option value="">-- Sélectionnez votre nom --</option></select>
       </div>
       <div id="ref-self-section" style="display:none">
         <div class="field">
@@ -275,7 +184,7 @@
           <button class="add-row-btn" onclick="addAgentRow()">+ Ajouter un agent</button>
         </div>
         <button class="submit-btn" id="r-submit" onclick="submitReferent()">Enregistrer toute l'équipe</button>
-        <div class="success-msg" id="r-success">L'équipe a bien été enregistrée !</div>
+        <div class="success-msg" id="r-success">✓ L'équipe a bien été enregistrée !</div>
         <div class="error-msg" id="r-error">Une erreur est survenue. Réessayez.</div>
       </div>
     </div>
@@ -283,180 +192,200 @@
 
   <!-- DASHBOARD -->
   <div id="panel-dashboard" class="panel">
-    <div class="stats-row">
-      <div class="stat-card green"><div class="stat-num" id="count-dispo">-</div><div class="stat-label">Disponibles</div></div>
-      <div class="stat-card amber"><div class="stat-num" id="count-absent">-</div><div class="stat-label">Absents</div></div>
-      <div class="stat-card blue"><div class="stat-num" id="count-total">-</div><div class="stat-label">Réponses</div></div>
+    <div id="lock-dashboard" class="lock-screen">
+      <div class="lock-icon">🔒</div>
+      <div class="lock-title">Accès organisateurs</div>
+      <div class="lock-desc">Entrez le code d'accès pour voir le tableau de bord</div>
+      <input type="password" class="lock-input" id="code-dashboard" placeholder="••••" maxlength="10" onkeydown="if(event.key==='Enter')unlockDash()">
+      <br><button class="lock-btn" onclick="unlockDash()">Accéder</button>
+      <div class="lock-error" id="lock-error-dash">Code incorrect ❌</div>
     </div>
-
-    <div id="planb-section" style="display:none">
-      <div class="planb-card">
-        <div class="planb-title">⚠️ Plan B — Agents absents</div>
-        <div class="planb-list" id="planb-list"></div>
+    <div id="content-dashboard" style="display:none">
+      <button class="logout-btn" onclick="lockTab('dashboard')">🔒 Verrouiller</button>
+      <br><br>
+      <div class="stats-row">
+        <div class="stat-card green"><div class="stat-num" id="count-dispo">-</div><div class="stat-label">Disponibles</div></div>
+        <div class="stat-card amber"><div class="stat-num" id="count-absent">-</div><div class="stat-label">Absents</div></div>
+        <div class="stat-card blue"><div class="stat-num" id="count-total">-</div><div class="stat-label">Réponses</div></div>
       </div>
-    </div>
-
-    <div class="filter-row">
-      <select id="filter-date" onchange="renderDash()"><option value="">Toutes les dates</option></select>
-      <select id="filter-service" onchange="renderDash()"><option value="">Tous les services</option></select>
-      <button class="export-btn" onclick="exportCSV()">Exporter CSV</button>
-    </div>
-
-    <div class="section-label">Liste des agents</div>
-    <div class="agent-list" id="agent-list">
-      <div class="loading-state">Chargement des réponses...</div>
+      <div id="planb-section" style="display:none">
+        <div class="planb-card">
+          <div class="planb-title">⚠️ Plan B — Agents absents à remplacer</div>
+          <div id="planb-list"></div>
+        </div>
+      </div>
+      <div class="filter-row">
+        <select id="filter-date" onchange="renderDash()"><option value="">Toutes les dates</option></select>
+        <select id="filter-service" onchange="renderDash()"><option value="">Tous les services</option></select>
+        <button class="action-btn" onclick="exportCSV()">📥 CSV</button>
+        <button class="action-btn" onclick="loadAndRenderDash()">🔄 Actualiser</button>
+      </div>
+      <div class="section-label">Liste des agents</div>
+      <div class="agent-list" id="agent-list"><div class="loading-state">Chargement...</div></div>
     </div>
   </div>
 
-  <!-- CONFIG -->
+  <!-- ADMIN -->
   <div id="panel-admin" class="panel">
-    <div class="config-section">
-      <div class="config-title">Date de la prochaine marche</div>
-      <div class="config-card">
-        <div class="field"><label>Date visible par tous les agents</label><input type="date" id="admin-date"></div>
-        <button class="save-btn" onclick="saveDate()">Enregistrer la date</button>
-        <div class="saved-note" id="date-saved-note">✓ Date enregistrée !</div>
-      </div>
+    <div id="lock-admin" class="lock-screen">
+      <div class="lock-icon">⚙️</div>
+      <div class="lock-title">Accès configuration</div>
+      <div class="lock-desc">Entrez le code d'accès pour modifier la configuration</div>
+      <input type="password" class="lock-input" id="code-admin" placeholder="••••" maxlength="10" onkeydown="if(event.key==='Enter')unlockAdmin()">
+      <br><button class="lock-btn" onclick="unlockAdmin()">Accéder</button>
+      <div class="lock-error" id="lock-error-admin">Code incorrect ❌</div>
     </div>
-    <div class="config-section">
-      <div class="config-title">Référents et encadrants</div>
-      <div id="referent-list"></div>
-      <div class="add-ref-row">
-        <input type="text" id="new-ref-nom" placeholder="Nom du référent">
-        <input type="text" id="new-ref-service" placeholder="Service">
-        <button onclick="addReferent()">+ Ajouter</button>
+    <div id="content-admin" style="display:none">
+      <button class="logout-btn" onclick="lockTab('admin')">🔒 Verrouiller</button>
+      <br><br>
+      <div class="config-section">
+        <div class="config-title">Date de la prochaine marche</div>
+        <div class="config-card">
+          <label>Date visible par tous les agents</label>
+          <input type="date" id="admin-date">
+          <button class="save-btn" onclick="saveDate()">Enregistrer</button>
+          <div class="saved-note" id="date-saved-note">✓ Date enregistrée !</div>
+        </div>
+      </div>
+      <div class="config-section">
+        <div class="config-title">Code d'accès organisateurs</div>
+        <div class="config-card">
+          <label>Modifier le code (tableau de bord + configuration)</label>
+          <input type="text" id="new-code" placeholder="Nouveau code">
+          <button class="save-btn" onclick="saveCode()">Enregistrer</button>
+          <div class="saved-note" id="code-saved-note">✓ Code modifié !</div>
+        </div>
+      </div>
+      <div class="config-section">
+        <div class="config-title">Référents et encadrants</div>
+        <div id="referent-list"></div>
+        <div class="add-ref-row">
+          <input type="text" id="new-ref-nom" placeholder="Nom du référent">
+          <input type="text" id="new-ref-service" placeholder="Service">
+          <button onclick="addReferent()">+ Ajouter</button>
+        </div>
+      </div>
+      <div class="config-section">
+        <div class="reset-section">
+          <div class="reset-title">🗑️ Remise à zéro après la marche</div>
+          <div class="reset-desc">Efface toutes les réponses des agents une fois la marche terminée. La configuration (référents, date, code) reste intacte.</div>
+          <button class="reset-btn" onclick="resetResponses()">Effacer toutes les réponses</button>
+          <div class="saved-note" id="reset-note" style="color:#E24B4A;margin-top:8px">✓ Réponses effacées ! Prêt pour la prochaine marche.</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-// ── CONFIG JSONBIN ────────────────────────────────────────────────
-const API_KEY = '$2a$10$dPtsHMi5993sK7F7vZXTuuWZci3i/CStRuHXT/6ELlgtgDjGq9iGa';
-const BASE_URL = 'https://api.jsonbin.io/v3/b';
-const HEADERS = { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY };
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbwjLttxuI7AutnsqtdbWcZyUsM_xqxhD40_UmstdN4dNyNPvq8jCwzaJ37a75WsF57i/exec';
+let config={marcheDate:'',referents:[],accessCode:'1234'};
+let responses=[];
+let agentDispo=null,selfDispo=null,agentRowCount=0;
+let dashUnlocked=false,adminUnlocked=false;
 
-// IDs des bins (créés automatiquement au premier lancement)
-let BIN_CONFIG = localStorage.getItem('mn_bin_config') || null;
-let BIN_RESPONSES = localStorage.getItem('mn_bin_responses') || null;
-
-// ── STATE LOCAL ───────────────────────────────────────────────────
-const DEFAULT_REFERENTS = [
-  { id: 'ref1', nom: 'Directeur Adjoint', service: 'Gardiens' },
-  { id: 'ref2', nom: 'Référent Services Techniques', service: 'Services Techniques' },
-];
-let config = { marcheDate: '', referents: DEFAULT_REFERENTS };
-let responses = [];
-let agentDispo = null, selfDispo = null, agentRowCount = 0;
-
-// ── JSONBIN API ───────────────────────────────────────────────────
-async function createBin(name, data) {
-  const res = await fetch(BASE_URL, {
-    method: 'POST',
-    headers: { ...HEADERS, 'X-Bin-Name': name, 'X-Bin-Private': 'false' },
-    body: JSON.stringify(data)
-  });
-  const json = await res.json();
-  return json.metadata?.id || null;
+async function api(params){
+  const url=SCRIPT_URL+'?'+new URLSearchParams(params);
+  const res=await fetch(url);
+  return res.json();
 }
 
-async function readBin(binId) {
-  const res = await fetch(`${BASE_URL}/${binId}/latest`, { headers: { 'X-Master-Key': API_KEY } });
-  const json = await res.json();
-  return json.record;
+async function init(){
+  try{config=await api({action:'getConfig'});updateBanner();}catch(e){console.error(e);}
+}
+init();
+
+function updateBanner(){
+  document.getElementById('banner-date-txt').textContent=config.marcheDate?fmtDate(config.marcheDate):'Aucune date configurée';
 }
 
-async function updateBin(binId, data) {
-  await fetch(`${BASE_URL}/${binId}`, {
-    method: 'PUT',
-    headers: HEADERS,
-    body: JSON.stringify(data)
+function showTab(tab){
+  ['form','dashboard','admin'].forEach((t,i)=>{
+    document.getElementById('panel-'+t).classList.toggle('active',t===tab);
+    document.querySelectorAll('.tab-btn')[i].classList.toggle('active',t===tab);
   });
 }
 
-async function initBins() {
-  try {
-    if (!BIN_CONFIG) {
-      BIN_CONFIG = await createBin('mn-config', config);
-      localStorage.setItem('mn_bin_config', BIN_CONFIG);
-    } else {
-      config = await readBin(BIN_CONFIG);
-    }
-    if (!BIN_RESPONSES) {
-      BIN_RESPONSES = await createBin('mn-responses', []);
-      localStorage.setItem('mn_bin_responses', BIN_RESPONSES);
-    } else {
-      responses = await readBin(BIN_RESPONSES);
-    }
-  } catch(e) {
-    console.error('Erreur init:', e);
+function tryShowTab(tab){
+  showTab(tab);
+  if(tab==='dashboard'&&dashUnlocked)loadAndRenderDash();
+  if(tab==='admin'&&adminUnlocked)renderAdmin();
+}
+
+function unlockDash(){
+  const code=document.getElementById('code-dashboard').value;
+  if(code===config.accessCode){
+    dashUnlocked=true;
+    document.getElementById('lock-dashboard').style.display='none';
+    document.getElementById('content-dashboard').style.display='block';
+    document.getElementById('code-dashboard').value='';
+    loadAndRenderDash();
+  }else{
+    const el=document.getElementById('lock-error-dash');
+    el.style.display='block';setTimeout(()=>el.style.display='none',2000);
   }
-  updateBanner();
-  renderAdmin();
 }
 
-async function saveConfig() {
-  if (BIN_CONFIG) await updateBin(BIN_CONFIG, config);
+function unlockAdmin(){
+  const code=document.getElementById('code-admin').value;
+  if(code===config.accessCode){
+    adminUnlocked=true;
+    document.getElementById('lock-admin').style.display='none';
+    document.getElementById('content-admin').style.display='block';
+    document.getElementById('code-admin').value='';
+    renderAdmin();
+  }else{
+    const el=document.getElementById('lock-error-admin');
+    el.style.display='block';setTimeout(()=>el.style.display='none',2000);
+  }
 }
 
-async function saveResponses() {
-  if (BIN_RESPONSES) await updateBin(BIN_RESPONSES, responses);
+function lockTab(tab){
+  if(tab==='dashboard'){
+    dashUnlocked=false;
+    document.getElementById('lock-dashboard').style.display='block';
+    document.getElementById('content-dashboard').style.display='none';
+  }else{
+    adminUnlocked=false;
+    document.getElementById('lock-admin').style.display='block';
+    document.getElementById('content-admin').style.display='none';
+  }
 }
 
-// ── INIT ──────────────────────────────────────────────────────────
-initBins();
-
-function updateBanner() {
-  document.getElementById('banner-date-txt').textContent =
-    config.marcheDate ? fmtDate(config.marcheDate) : 'Aucune date configurée — voir Configuration';
+function selectMode(mode){
+  document.getElementById('mode-agent').classList.toggle('selected',mode==='agent');
+  document.getElementById('mode-referent').classList.toggle('selected',mode==='referent');
+  document.getElementById('form-agent').style.display=mode==='agent'?'':'none';
+  document.getElementById('form-referent').style.display=mode==='referent'?'':'none';
+  if(mode==='referent')populateRefSelect();
 }
 
-// ── TABS ──────────────────────────────────────────────────────────
-function showTab(tab) {
-  ['form','dashboard','admin'].forEach((t,i) => {
-    document.getElementById('panel-'+t).classList.toggle('active', t===tab);
-    document.querySelectorAll('.tab-btn')[i].classList.toggle('active', t===tab);
-  });
-  if (tab==='dashboard') { loadAndRenderDash(); }
-  if (tab==='admin') renderAdmin();
-}
-
-// ── MODE ──────────────────────────────────────────────────────────
-function selectMode(mode) {
-  document.getElementById('mode-agent').classList.toggle('selected', mode==='agent');
-  document.getElementById('mode-referent').classList.toggle('selected', mode==='referent');
-  document.getElementById('form-agent').style.display = mode==='agent' ? '' : 'none';
-  document.getElementById('form-referent').style.display = mode==='referent' ? '' : 'none';
-  if (mode==='referent') populateRefSelect();
-}
-
-function populateRefSelect() {
-  const sel = document.getElementById('r-select');
-  sel.innerHTML = '<option value="">-- Sélectionnez votre nom --</option>';
-  (config.referents || []).forEach(r => {
-    const o = document.createElement('option');
-    o.value = r.id; o.textContent = r.nom + ' — ' + r.service;
-    sel.appendChild(o);
+function populateRefSelect(){
+  const sel=document.getElementById('r-select');
+  sel.innerHTML='<option value="">-- Sélectionnez votre nom --</option>';
+  (config.referents||[]).forEach(r=>{
+    const o=document.createElement('option');
+    o.value=r.id;o.textContent=r.nom+' — '+r.service;sel.appendChild(o);
   });
 }
 
-function onReferentChange() {
-  const ref = (config.referents || []).find(r => r.id === document.getElementById('r-select').value);
-  selfDispo = null; agentRowCount = 0;
-  document.getElementById('self-btn-dispo').className = 'tg-btn';
-  document.getElementById('self-btn-absent').className = 'tg-btn';
-  document.getElementById('agents-block').innerHTML = '';
-  if (!ref) { document.getElementById('ref-self-section').style.display = 'none'; return; }
-  document.getElementById('ref-self-name').textContent = ref.nom + ' (' + ref.service + ')';
-  document.getElementById('ref-self-section').style.display = '';
-  addAgentRow(); addAgentRow();
+function onReferentChange(){
+  const ref=(config.referents||[]).find(r=>r.id===document.getElementById('r-select').value);
+  selfDispo=null;agentRowCount=0;
+  document.getElementById('self-btn-dispo').className='tg-btn';
+  document.getElementById('self-btn-absent').className='tg-btn';
+  document.getElementById('agents-block').innerHTML='';
+  if(!ref){document.getElementById('ref-self-section').style.display='none';return;}
+  document.getElementById('ref-self-name').textContent=ref.nom+' ('+ref.service+')';
+  document.getElementById('ref-self-section').style.display='';
+  addAgentRow();addAgentRow();
 }
 
-function addAgentRow() {
-  const id = agentRowCount++;
-  const div = document.createElement('div');
-  div.className = 'agent-row-form'; div.id = 'arow-'+id;
-  div.innerHTML = `<input type="text" placeholder="Nom de l'agent" id="aname-${id}">
+function addAgentRow(){
+  const id=agentRowCount++;
+  const div=document.createElement('div');
+  div.className='agent-row-form';div.id='arow-'+id;
+  div.innerHTML=`<input type="text" placeholder="Nom de l'agent" id="aname-${id}">
     <div class="toggle-group">
       <button class="tg-btn" id="atg-d-${id}" onclick="setRowDispo(${id},'dispo')">✓</button>
       <button class="tg-btn" id="atg-a-${id}" onclick="setRowDispo(${id},'absent')">✗</button>
@@ -464,159 +393,143 @@ function addAgentRow() {
     <button class="remove-row-btn" onclick="removeAgentRow(${id})">×</button>`;
   document.getElementById('agents-block').appendChild(div);
 }
-function removeAgentRow(id) { const el=document.getElementById('arow-'+id); if(el) el.remove(); }
-function setRowDispo(id, val) {
-  document.getElementById('arow-'+id).dataset.dispo = val;
-  document.getElementById('atg-d-'+id).className = 'tg-btn'+(val==='dispo'?' on-dispo':'');
-  document.getElementById('atg-a-'+id).className = 'tg-btn'+(val==='absent'?' on-absent':'');
+function removeAgentRow(id){const el=document.getElementById('arow-'+id);if(el)el.remove();}
+function setRowDispo(id,val){
+  document.getElementById('arow-'+id).dataset.dispo=val;
+  document.getElementById('atg-d-'+id).className='tg-btn'+(val==='dispo'?' on-dispo':'');
+  document.getElementById('atg-a-'+id).className='tg-btn'+(val==='absent'?' on-absent':'');
 }
-function setSelfDispo(val) {
-  selfDispo = val;
-  document.getElementById('self-btn-dispo').className = 'tg-btn'+(val==='dispo'?' on-dispo':'');
-  document.getElementById('self-btn-absent').className = 'tg-btn'+(val==='absent'?' on-absent':'');
+function setSelfDispo(val){
+  selfDispo=val;
+  document.getElementById('self-btn-dispo').className='tg-btn'+(val==='dispo'?' on-dispo':'');
+  document.getElementById('self-btn-absent').className='tg-btn'+(val==='absent'?' on-absent':'');
 }
-function selectAgentDispo(val) {
-  agentDispo = val;
-  document.getElementById('a-btn-dispo').className = 'dispo-btn'+(val==='dispo'?' sel-dispo':'');
-  document.getElementById('a-btn-absent').className = 'dispo-btn'+(val==='absent'?' sel-absent':'');
-}
-
-// ── SUBMIT ────────────────────────────────────────────────────────
-function upsert(entry) {
-  const i = responses.findIndex(r => r.nom.toLowerCase()===entry.nom.toLowerCase() && r.date===entry.date);
-  if(i>=0) responses[i]=entry; else responses.push(entry);
-}
-function getDate() { return config.marcheDate || new Date().toISOString().split('T')[0]; }
-
-async function submitAgent() {
-  const nom = document.getElementById('a-nom').value.trim();
-  const service = document.getElementById('a-service').value.trim();
-  if (!nom || !agentDispo) { alert('Veuillez renseigner votre nom et votre disponibilité.'); return; }
-  const btn = document.getElementById('a-submit');
-  btn.disabled = true; btn.textContent = 'Enregistrement...';
-  try {
-    upsert({ nom, service, date: getDate(), dispo: agentDispo, source: 'agent', ts: Date.now() });
-    await saveResponses();
-    document.getElementById('a-nom').value = '';
-    document.getElementById('a-service').value = '';
-    agentDispo = null;
-    document.getElementById('a-btn-dispo').className = 'dispo-btn';
-    document.getElementById('a-btn-absent').className = 'dispo-btn';
-    show('a-success', 3000);
-  } catch(e) { show('a-error', 4000); }
-  btn.disabled = false; btn.textContent = 'Enregistrer';
+function selectAgentDispo(val){
+  agentDispo=val;
+  document.getElementById('a-btn-dispo').className='dispo-btn'+(val==='dispo'?' sel-dispo':'');
+  document.getElementById('a-btn-absent').className='dispo-btn'+(val==='absent'?' sel-absent':'');
 }
 
-async function submitReferent() {
-  const ref = (config.referents || []).find(r => r.id===document.getElementById('r-select').value);
-  if (!ref) { alert('Veuillez sélectionner votre nom.'); return; }
-  if (!selfDispo) { alert('Veuillez indiquer votre propre disponibilité.'); return; }
-  const rows = document.querySelectorAll('#agents-block .agent-row-form');
-  const entries = [];
-  for (const row of rows) {
-    const id = row.id.replace('arow-','');
-    const nom = document.getElementById('aname-'+id).value.trim();
-    const dispo = row.dataset.dispo;
-    if (!nom) continue;
-    if (!dispo) { alert('Disponibilité manquante pour "'+nom+'".'); return; }
-    entries.push({ nom, dispo });
+function getDate(){return config.marcheDate||new Date().toISOString().split('T')[0];}
+
+async function submitAgent(){
+  const nom=document.getElementById('a-nom').value.trim();
+  const service=document.getElementById('a-service').value.trim();
+  if(!nom||!agentDispo){alert('Veuillez renseigner votre nom et votre disponibilité.');return;}
+  const btn=document.getElementById('a-submit');
+  btn.disabled=true;btn.textContent='Enregistrement...';
+  try{
+    await api({action:'saveResponse',data:JSON.stringify({nom,service,date:getDate(),dispo:agentDispo,source:'agent',ts:Date.now()})});
+    document.getElementById('a-nom').value='';
+    document.getElementById('a-service').value='';
+    agentDispo=null;
+    document.getElementById('a-btn-dispo').className='dispo-btn';
+    document.getElementById('a-btn-absent').className='dispo-btn';
+    show('a-success',3000);
+  }catch(e){show('a-error',4000);}
+  btn.disabled=false;btn.textContent='Enregistrer';
+}
+
+async function submitReferent(){
+  const ref=(config.referents||[]).find(r=>r.id===document.getElementById('r-select').value);
+  if(!ref){alert('Veuillez sélectionner votre nom.');return;}
+  if(!selfDispo){alert('Veuillez indiquer votre propre disponibilité.');return;}
+  const rows=document.querySelectorAll('#agents-block .agent-row-form');
+  const entries=[];
+  for(const row of rows){
+    const id=row.id.replace('arow-','');
+    const nom=document.getElementById('aname-'+id).value.trim();
+    const dispo=row.dataset.dispo;
+    if(!nom)continue;
+    if(!dispo){alert('Disponibilité manquante pour "'+nom+'".');return;}
+    entries.push({nom,dispo});
   }
-  const btn = document.getElementById('r-submit');
-  btn.disabled = true; btn.textContent = 'Enregistrement...';
-  try {
-    const date = getDate();
-    upsert({ nom: ref.nom, service: ref.service, date, dispo: selfDispo, source: 'referent-self', ts: Date.now() });
-    entries.forEach(e => upsert({ nom: e.nom, service: ref.service, date, dispo: e.dispo, source: 'via:'+ref.nom, ts: Date.now() }));
-    await saveResponses();
-    selfDispo = null;
-    document.getElementById('self-btn-dispo').className = 'tg-btn';
-    document.getElementById('self-btn-absent').className = 'tg-btn';
-    document.getElementById('agents-block').innerHTML = '';
-    agentRowCount = 0; addAgentRow(); addAgentRow();
-    show('r-success', 3500);
-  } catch(e) { show('r-error', 4000); }
-  btn.disabled = false; btn.textContent = 'Enregistrer toute l\'équipe';
+  const btn=document.getElementById('r-submit');
+  btn.disabled=true;btn.textContent='Enregistrement...';
+  try{
+    const date=getDate();
+    await api({action:'saveResponse',data:JSON.stringify({nom:ref.nom,service:ref.service,date,dispo:selfDispo,source:'referent-self',ts:Date.now()})});
+    for(const e of entries){
+      await api({action:'saveResponse',data:JSON.stringify({nom:e.nom,service:ref.service,date,dispo:e.dispo,source:'via:'+ref.nom,ts:Date.now()})});
+    }
+    selfDispo=null;
+    document.getElementById('self-btn-dispo').className='tg-btn';
+    document.getElementById('self-btn-absent').className='tg-btn';
+    document.getElementById('agents-block').innerHTML='';
+    agentRowCount=0;addAgentRow();addAgentRow();
+    show('r-success',3500);
+  }catch(e){show('r-error',4000);}
+  btn.disabled=false;btn.textContent="Enregistrer toute l'équipe";
 }
 
-// ── DASHBOARD ─────────────────────────────────────────────────────
-async function loadAndRenderDash() {
-  document.getElementById('agent-list').innerHTML = '<div class="loading-state">Chargement...</div>';
-  try {
-    if (BIN_RESPONSES) responses = await readBin(BIN_RESPONSES);
-  } catch(e) {}
+async function loadAndRenderDash(){
+  document.getElementById('agent-list').innerHTML='<div class="loading-state">Chargement...</div>';
+  try{responses=await api({action:'getResponses'});}catch(e){}
   renderDash();
 }
 
-function renderDash() {
-  const fDate = document.getElementById('filter-date').value;
-  const fService = document.getElementById('filter-service').value;
-
-  const dates = [...new Set(responses.map(r=>r.date))].sort().reverse();
-  const services = [...new Set(responses.map(r=>r.service).filter(Boolean))].sort();
-
-  const dSel = document.getElementById('filter-date'); const curD = dSel.value;
-  dSel.innerHTML = '<option value="">Toutes les dates</option>';
-  dates.forEach(d => { const o=document.createElement('option'); o.value=d; o.textContent=fmtDate(d); if(d===curD)o.selected=true; dSel.appendChild(o); });
-
-  const sSel = document.getElementById('filter-service'); const curS = sSel.value;
-  sSel.innerHTML = '<option value="">Tous les services</option>';
-  services.forEach(s => { const o=document.createElement('option'); o.value=s; o.textContent=s; if(s===curS)o.selected=true; sSel.appendChild(o); });
-
-  let data = responses;
-  if (fDate) data = data.filter(r=>r.date===fDate);
-  if (fService) data = data.filter(r=>r.service===fService);
-
-  const dispos = data.filter(r=>r.dispo==='dispo');
-  const absents = data.filter(r=>r.dispo==='absent');
-  document.getElementById('count-dispo').textContent = dispos.length;
-  document.getElementById('count-absent').textContent = absents.length;
-  document.getElementById('count-total').textContent = data.length;
-
-  // Plan B
-  const planbSection = document.getElementById('planb-section');
-  if (absents.length > 0) {
-    planbSection.style.display = '';
-    document.getElementById('planb-list').innerHTML = absents.map(r =>
-      `<div class="planb-item">✗ ${r.nom} <span style="color:#854F0B">(${r.service||'Service non précisé'})</span> — à remplacer</div>`
-    ).join('');
-  } else {
-    planbSection.style.display = 'none';
-  }
-
-  const list = document.getElementById('agent-list');
-  if (!data.length) { list.innerHTML = '<div class="empty-state">Aucune réponse pour ces critères.</div>'; return; }
-
-  const sorted = [...data].sort((a,b) => { if(a.dispo!==b.dispo) return a.dispo==='dispo'?-1:1; return a.nom.localeCompare(b.nom); });
-  const srcLabel = s => { if(!s||s==='agent') return 'Déclaration directe'; if(s==='referent-self') return 'Référent'; if(s.startsWith('via:')) return 'Via '+s.slice(4); return s; };
-  list.innerHTML = sorted.map(r => `
+function renderDash(){
+  const fDate=document.getElementById('filter-date').value;
+  const fService=document.getElementById('filter-service').value;
+  const dates=[...new Set(responses.map(r=>r.date))].sort().reverse();
+  const services=[...new Set(responses.map(r=>r.service).filter(Boolean))].sort();
+  const dSel=document.getElementById('filter-date');const curD=dSel.value;
+  dSel.innerHTML='<option value="">Toutes les dates</option>';
+  dates.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=fmtDate(d);if(d===curD)o.selected=true;dSel.appendChild(o);});
+  const sSel=document.getElementById('filter-service');const curS=sSel.value;
+  sSel.innerHTML='<option value="">Tous les services</option>';
+  services.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;if(s===curS)o.selected=true;sSel.appendChild(o);});
+  let data=responses;
+  if(fDate)data=data.filter(r=>r.date===fDate);
+  if(fService)data=data.filter(r=>r.service===fService);
+  const absents=data.filter(r=>r.dispo==='absent');
+  document.getElementById('count-dispo').textContent=data.filter(r=>r.dispo==='dispo').length;
+  document.getElementById('count-absent').textContent=absents.length;
+  document.getElementById('count-total').textContent=data.length;
+  const pb=document.getElementById('planb-section');
+  if(absents.length>0){
+    pb.style.display='';
+    document.getElementById('planb-list').innerHTML=absents.map(r=>`<div class="planb-item">✗ ${r.nom} (${r.service||'?'}) — à remplacer</div>`).join('');
+  }else{pb.style.display='none';}
+  const list=document.getElementById('agent-list');
+  if(!data.length){list.innerHTML='<div class="empty-state">Aucune réponse pour ces critères.</div>';return;}
+  const sorted=[...data].sort((a,b)=>{if(a.dispo!==b.dispo)return a.dispo==='dispo'?-1:1;return a.nom.localeCompare(b.nom);});
+  const srcLabel=s=>{if(!s||s==='agent')return 'Direct';if(s==='referent-self')return 'Référent';if(s.startsWith('via:'))return 'Via '+s.slice(4);return s;};
+  list.innerHTML=sorted.map(r=>`
     <div class="dash-row">
-      <div>
+      <div class="da-info">
         <div class="da-name">${r.nom}</div>
-        <div class="da-meta">${r.service||'Service non précisé'} · ${fmtDate(r.date)} · ${srcLabel(r.source)}</div>
+        <div class="da-meta">${r.service||'?'} · ${fmtDate(r.date)} · ${srcLabel(r.source)}</div>
       </div>
-      <span class="badge ${r.dispo}">${r.dispo==='dispo'?'Disponible':'Absent'}</span>
+      <div class="da-actions">
+        <span class="badge ${r.dispo}">${r.dispo==='dispo'?'Disponible':'Absent'}</span>
+        <button class="del-agent-btn" onclick="deleteAgent('${r.nom.replace(/'/g,"\\'")}','${r.date}')" title="Supprimer">🗑️</button>
+      </div>
     </div>`).join('');
 }
 
-function exportCSV() {
-  if (!responses.length) { alert('Aucune donnée à exporter.'); return; }
-  const fDate = document.getElementById('filter-date').value;
-  const fService = document.getElementById('filter-service').value;
-  let data = responses;
-  if (fDate) data = data.filter(r=>r.date===fDate);
-  if (fService) data = data.filter(r=>r.service===fService);
-  const rows = [['Nom','Service','Date','Disponibilité','Source']];
-  data.forEach(r => rows.push([r.nom, r.service||'', r.date, r.dispo==='dispo'?'Disponible':'Absent', r.source||'']));
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,'+encodeURIComponent(rows.map(r=>r.join(';')).join('\n'));
-  a.download = 'marche_nuit.csv'; a.click();
+async function deleteAgent(nom,date){
+  if(!confirm('Supprimer la réponse de "'+nom+'" ?'))return;
+  try{
+    await api({action:'deleteResponse',nom,date});
+    responses=responses.filter(r=>!(r.nom===nom&&r.date===date));
+    renderDash();
+  }catch(e){alert('Erreur lors de la suppression.');}
 }
 
-// ── ADMIN ─────────────────────────────────────────────────────────
-function renderAdmin() {
-  if (config.marcheDate) document.getElementById('admin-date').value = config.marcheDate;
-  const list = document.getElementById('referent-list');
-  list.innerHTML = (config.referents||[]).map(ref => `
+function exportCSV(){
+  if(!responses.length){alert('Aucune donnée à exporter.');return;}
+  const rows=[['Nom','Service','Date','Disponibilité','Source']];
+  responses.forEach(r=>rows.push([r.nom,r.service||'',r.date,r.dispo==='dispo'?'Disponible':'Absent',r.source||'']));
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.map(r=>r.join(';')).join('\n'));
+  a.download='marche_nuit.csv';a.click();
+}
+
+function renderAdmin(){
+  if(config.marcheDate)document.getElementById('admin-date').value=config.marcheDate;
+  const list=document.getElementById('referent-list');
+  list.innerHTML=(config.referents||[]).map(ref=>`
     <div class="ref-card">
       <div class="ref-view">
         <div><div class="ref-view-nom">${ref.nom}</div><div class="ref-view-svc">${ref.service}</div></div>
@@ -638,48 +551,61 @@ function renderAdmin() {
     </div>`).join('');
 }
 
-function openEdit(id) {
-  (config.referents||[]).forEach(r => closeEdit(r.id));
-  document.getElementById('re-'+id).classList.add('open');
-}
-function closeEdit(id) { const el=document.getElementById('re-'+id); if(el) el.classList.remove('open'); }
+function openEdit(id){(config.referents||[]).forEach(r=>closeEdit(r.id));document.getElementById('re-'+id).classList.add('open');}
+function closeEdit(id){const el=document.getElementById('re-'+id);if(el)el.classList.remove('open');}
 
-async function saveEdit(id) {
-  const nom = document.getElementById('re-nom-'+id).value.trim();
-  const svc = document.getElementById('re-svc-'+id).value.trim();
-  if (!nom||!svc) { alert('Le nom et le service ne peuvent pas être vides.'); return; }
-  const ref = (config.referents||[]).find(r=>r.id===id);
-  if (ref) { ref.nom=nom; ref.service=svc; await saveConfig(); renderAdmin(); }
+async function saveEdit(id){
+  const nom=document.getElementById('re-nom-'+id).value.trim();
+  const svc=document.getElementById('re-svc-'+id).value.trim();
+  if(!nom||!svc){alert('Champs obligatoires.');return;}
+  const ref=(config.referents||[]).find(r=>r.id===id);
+  if(ref){ref.nom=nom;ref.service=svc;await api({action:'saveConfig',data:JSON.stringify(config)});renderAdmin();}
 }
 
-async function delRef(id) {
-  if (confirm('Supprimer ce référent ?')) {
-    config.referents = (config.referents||[]).filter(r=>r.id!==id);
-    await saveConfig(); renderAdmin();
-  }
+async function delRef(id){
+  if(!confirm('Supprimer ce référent ?'))return;
+  config.referents=(config.referents||[]).filter(r=>r.id!==id);
+  await api({action:'saveConfig',data:JSON.stringify(config)});renderAdmin();
 }
 
-async function saveDate() {
-  const d = document.getElementById('admin-date').value;
-  if (!d) { alert('Veuillez sélectionner une date.'); return; }
-  config.marcheDate = d; await saveConfig(); updateBanner();
-  show('date-saved-note', 2500);
+async function saveDate(){
+  const d=document.getElementById('admin-date').value;
+  if(!d){alert('Veuillez sélectionner une date.');return;}
+  config.marcheDate=d;
+  await api({action:'saveConfig',data:JSON.stringify(config)});
+  updateBanner();show('date-saved-note',2500);
 }
 
-async function addReferent() {
-  const nom = document.getElementById('new-ref-nom').value.trim();
-  const svc = document.getElementById('new-ref-service').value.trim();
-  if (!nom||!svc) { alert('Renseignez le nom et le service.'); return; }
-  if (!config.referents) config.referents = [];
-  config.referents.push({ id: 'ref_'+Date.now(), nom, service: svc });
-  await saveConfig(); renderAdmin();
-  document.getElementById('new-ref-nom').value = '';
-  document.getElementById('new-ref-service').value = '';
+async function saveCode(){
+  const code=document.getElementById('new-code').value.trim();
+  if(!code){alert('Le code ne peut pas être vide.');return;}
+  config.accessCode=code;
+  await api({action:'saveConfig',data:JSON.stringify(config)});
+  document.getElementById('new-code').value='';
+  show('code-saved-note',2500);
 }
 
-// ── UTILS ─────────────────────────────────────────────────────────
-function fmtDate(d) { if(!d) return ''; const [y,m,j]=d.split('-'); return `${j}/${m}/${y}`; }
-function show(id, ms) { const el=document.getElementById(id); el.style.display='block'; setTimeout(()=>el.style.display='none', ms); }
+async function addReferent(){
+  const nom=document.getElementById('new-ref-nom').value.trim();
+  const svc=document.getElementById('new-ref-service').value.trim();
+  if(!nom||!svc){alert('Renseignez le nom et le service.');return;}
+  if(!config.referents)config.referents=[];
+  config.referents.push({id:'ref_'+Date.now(),nom,service:svc});
+  await api({action:'saveConfig',data:JSON.stringify(config)});
+  renderAdmin();
+  document.getElementById('new-ref-nom').value='';
+  document.getElementById('new-ref-service').value='';
+}
+
+async function resetResponses(){
+  if(!confirm('Effacer TOUTES les réponses des agents ?\nCette action est irréversible.'))return;
+  await api({action:'resetResponses'});
+  responses=[];
+  show('reset-note',3000);
+}
+
+function fmtDate(d){if(!d)return '';const[y,m,j]=d.split('-');return`${j}/${m}/${y}`;}
+function show(id,ms){const el=document.getElementById(id);el.style.display='block';setTimeout(()=>el.style.display='none',ms);}
 </script>
 </body>
 </html>
