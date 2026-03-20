@@ -510,7 +510,7 @@ function renderDash(){
 
 async function deleteAgent(nom,date){
   if(!confirm('Supprimer la réponse de "'+nom+'" ?'))return;
-  try{
+    await api({action:'deleteResponse',nom:nom,date:cleanDate(date)});
     await api({action:'deleteResponse',nom,date});
     await loadAndRenderDash();
   }catch(e){alert('Erreur lors de la suppression.');}
@@ -603,7 +603,8 @@ async function resetResponses(){
   show('reset-note',3000);
 }
 
-function fmtDate(d){if(!d)return '';const[y,m,j]=d.split('-');return`${j}/${m}/${y}`;}
+function fmtDate(d){if(!d)return '';try{if(String(d).includes('T')){const dt=new Date(d);const j=String(dt.getUTCDate()).padStart(2,'0');const m=String(dt.getUTCMonth()+1).padStart(2,'0');const y=dt.getUTCFullYear();return j+'/'+m+'/'+y;}const[y,m,j]=String(d).split('-');return j+'/'+m+'/'+y;}catch(e){return String(d);}}
+function cleanDate(d){if(!d)return '';try{if(String(d).includes('T')){const dt=new Date(d);const j=String(dt.getUTCDate()).padStart(2,'0');const m=String(dt.getUTCMonth()+1).padStart(2,'0');const y=dt.getUTCFullYear();return y+'-'+m+'-'+j;}return String(d);}catch(e){return String(d);}}
 function show(id,ms){const el=document.getElementById(id);el.style.display='block';setTimeout(()=>el.style.display='none',ms);}
 </script>
 </body>
